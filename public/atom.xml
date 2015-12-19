@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[PPxu is me]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://ppxu.me/"/>
+  <updated>2015-12-19T04:33:45.000Z</updated>
+  <id>http://ppxu.me/</id>
+  
+  <author>
+    <name><![CDATA[PPxu]]></name>
+    <email><![CDATA[xyang0110@126.com]]></email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[阿里云ECS搭建hexo]]></title>
+    <link href="http://ppxu.me/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/"/>
+    <id>http://ppxu.me/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/</id>
+    <published>2015-12-19T02:31:27.000Z</published>
+    <updated>2015-12-19T04:33:45.000Z</updated>
+    <content type="html"><![CDATA[<p>最近刚撸了个阿里云ECS服务器来折腾，先搭个hexo博客，这里记录一下操作步骤。</p>
+<a id="more"></a>
+<p>撸主选的是最便宜的阿里云ECS，应付日常小撸应该足够了，具体配置如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CPU：<span class="number">1</span>核</span><br><span class="line">内存：<span class="number">1024</span>MB</span><br><span class="line">操作系统：CentOS <span class="number">7.0</span> <span class="number">64</span>位</span><br><span class="line">带宽：<span class="number">1</span>Mbps</span><br></pre></td></tr></table></figure>
+<p>下面是具体的手法：</p>
+<ul>
+<li>连接服务器</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@xx<span class="class">.xx</span><span class="class">.xx</span><span class="class">.xx</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>安装Nodejs环境</p>
+<ul>
+<li>更新软件源</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">yum</span> -y update</span><br></pre></td></tr></table></figure>
+<ul>
+<li>下载Nodejs</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src</span><br><span class="line">wget http://nodejs.org/dist/<span class="keyword">node</span><span class="identifier"></span><span class="title">-latest</span>.tar.gz</span><br></pre></td></tr></table></figure>
+<ul>
+<li>解压</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxf <span class="keyword">node</span><span class="identifier"></span><span class="title">-latest</span>.tar.gz</span><br><span class="line">cd <span class="keyword">node</span><span class="identifier"></span><span class="title">-v</span>*.*.*</span><br></pre></td></tr></table></figure>
+<ul>
+<li>编译安装</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line"><span class="built_in">make</span></span><br><span class="line"><span class="built_in">make</span> install</span><br></pre></td></tr></table></figure>
+<ul>
+<li>确认安装成功</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span><span class="identifier"> </span><span class="title">-v</span></span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装hexo</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo-cli</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">npm <span class="keyword">install</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动hexo</li>
+</ul>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">server</span>    <span class="comment">//普通启动</span></span><br><span class="line">hexo <span class="keyword">server</span> &amp;  <span class="comment">//静默启动</span></span><br></pre></td></tr></table></figure>
+<p>启动成功后就可以通过服务器的ip地址<code>xx.xx.xx.xx:4000</code>访问到页面了，当然我们并不想输端口号，所以最好把4000转到80上，这次先没有用上nginx的反向代理，只是用iptables做了一下转发处理。</p>
+<ul>
+<li>转到80端口</li>
+</ul>
+<p>编辑iptables文件</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi <span class="regexp">/etc/</span>sysconfig<span class="regexp">/iptables</span></span><br></pre></td></tr></table></figure>
+<p>加上下面这段</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">80</span> -j ACCEPT</span><br><span class="line">-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">4000</span> -j ACCEPT</span><br><span class="line"></span><br><span class="line">*nat</span><br><span class="line">-A PREROUTING -p tcp --dport <span class="number">80</span> -j REDIRECT --to-ports <span class="number">4000</span></span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure>
+<p>重启iptables服务</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">service</span> iptables restart</span><br></pre></td></tr></table></figure>
+<p>然后就发现报错了</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed <span class="built_in">to</span> restart iptables.service: Unit iptables.service failed <span class="built_in">to</span> <span class="built_in">load</span>: No such <span class="built_in">file</span> <span class="operator">or</span> <span class="built_in">directory</span>.</span><br></pre></td></tr></table></figure>
+<p>查了一下原来是CentOS 7中的防火墙改成了firewalld，所以要换回iptables。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="operator"><span class="keyword">stop</span> firewalld</span><br><span class="line">systemctl <span class="keyword">mask</span> firewalld</span><br><span class="line">yum <span class="keyword">install</span> iptables-services</span><br><span class="line">systemctl <span class="keyword">enable</span> iptables</span><br><span class="line">service iptables <span class="keyword">start</span></span></span><br></pre></td></tr></table></figure>
+<p>这样就可以通过ip地址<code>xx.xx.xx.xx</code>访问网站了。</p>
+<ul>
+<li>域名解析</li>
+</ul>
+<p>再撸个域名<code>ppxu.me</code>，把<code>@</code>和<code>www</code>都解析到服务器ip地址就可以了。</p>
+<ul>
+<li>git管理</li>
+</ul>
+<p>再配置一下git环境，以后就可以通过git来管理内容了。</p>
+<h4 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/index.html</a></li>
+<li><a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">http://wsgzao.github.io/post/hexo-guide/</a></li>
+<li><a href="http://zipperary.com/categories/hexo/" target="_blank" rel="external">http://zipperary.com/categories/hexo/</a></li>
+<li><a href="http://www.jianshu.com/p/73779eacb494" target="_blank" rel="external">http://www.jianshu.com/p/73779eacb494</a></li>
+<li><a href="http://www.tuijiankan.com/2015/05/04/%E9%98%BF%E9%87%8C%E4%BA%91Centos6%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AENodejs%E3%80%81Nginx%E3%80%81Hexo%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/" target="_blank" rel="external">http://www.tuijiankan.com/2015/05/04/阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录/</a></li>
+<li><a href="http://codybonney.com/installing-node-js-0-10-24-on-centos-6-4/" target="_blank" rel="external">http://codybonney.com/installing-node-js-0-10-24-on-centos-6-4/</a></li>
+<li><a href="http://codybonney.com/redirect-port-80-to-another-port-using-iptables-on-centos/" target="_blank" rel="external">http://codybonney.com/redirect-port-80-to-another-port-using-iptables-on-centos/</a></li>
+<li><a href="http://www.vkilo.com/rhel-7-iptables-service.html" target="_blank" rel="external">http://www.vkilo.com/rhel-7-iptables-service.html</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>最近刚撸了个阿里云ECS服务器来折腾，先搭个hexo博客，这里记录一下操作步骤。</p>]]>
+    
+    </summary>
+    
+      <category term="aliyun" scheme="http://ppxu.me/tags/aliyun/"/>
+    
+      <category term="centos" scheme="http://ppxu.me/tags/centos/"/>
+    
+      <category term="ecs" scheme="http://ppxu.me/tags/ecs/"/>
+    
+      <category term="hexo" scheme="http://ppxu.me/tags/hexo/"/>
+    
+      <category term="nodejs" scheme="http://ppxu.me/tags/nodejs/"/>
+    
+      <category term="blog" scheme="http://ppxu.me/categories/blog/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <link href="http://ppxu.me/2015/12/18/hello-world/"/>
+    <id>http://ppxu.me/2015/12/18/hello-world/</id>
+    <published>2015-12-18T14:31:17.000Z</published>
+    <updated>2015-12-18T14:31:17.000Z</updated>
+    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
+    </summary>
+    
+  </entry>
+  
+</feed>

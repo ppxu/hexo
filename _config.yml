@@ -3,16 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: PPxu is me
 subtitle:
-description:
-author: John Doe
-language:
+description: ppxu f2e fed full-stack
+author: PPxu
+email: xyang0110@126.com
+language: zh-CN
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://ppxu.me
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
