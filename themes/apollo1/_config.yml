@@ -1,0 +1,18 @@
+menu:
+    博客: /
+    微博: http://weibo.com/ppxu
+    rss: /atom.xml
+    github: https://github.com/ppxu
+
+favicon: /favicon.png
+logo: /favicon.png
+
+# comment
+# e.g disqus: seansun
+disqus:
+duoshuo: ppxu
+
+# google-analytics:
+ga:
+# baidu-analytics:
+ba: //hm.baidu.com/hm.js?3acd3117bffe31f23c04e3b8fec963fc
