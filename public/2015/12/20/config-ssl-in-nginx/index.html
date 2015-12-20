@@ -1,7 +1,41 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title>nginx配置ssl · PPxu is me</title><meta name="description" content="今天给服务器安装了nginx，并配置了ssl，网址左边终于有萌萌哒的小绿锁了，这里还是做一下记录。
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <title>nginx配置ssl · PPxu is me
+    </title>
+    <meta name="description" content="今天给服务器安装了nginx，并配置了ssl，网址左边终于有萌萌哒的小绿锁了，这里还是做一下记录。
 
 先是安装nginx
-123wget http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpmrpm -ivh nginx-release-centos-7-0.el7."><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">博客</a></li><li class="nav-list-item"><a href="http://weibo.com/ppxu" target="_blank" class="nav-list-link">微博</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li><li class="nav-list-item"><a href="https://github.com/ppxu" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">nginx配置ssl</h1><div class="post-meta"><div class="post-time">2015年12月20日</div></div><div class="post-content"><p>今天给服务器安装了nginx，并配置了ssl，网址左边终于有萌萌哒的小绿锁了，这里还是做一下记录。</p>
+123wget http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpmrpm -ivh nginx-release-centos-7-0.el7.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="short icon" href="/favicon.png">
+    <link rel="stylesheet" href="/css/apollo.css">
+  </head>
+  <body>
+    <header><a href="/" class="logo-link"><img src="/favicon.png"></a>
+      <ul class="nav nav-list">
+        <li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">博客</a>
+        </li>
+        <li class="nav-list-item"><a href="http://weibo.com/ppxu" target="_blank" class="nav-list-link">微博</a>
+        </li>
+        <li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a>
+        </li>
+        <li class="nav-list-item"><a href="https://github.com/ppxu" target="_blank" class="nav-list-link">GITHUB</a>
+        </li>
+      </ul>
+    </header>
+    <section class="container">
+            <div class="post">
+              <article class="post-block">
+                <h1 class="post-title">nginx配置ssl
+                </h1>
+                      <div class="post-meta">
+                        <div class="post-time">2015年12月20日
+                        </div>
+                      </div>
+                <div class="post-content"><p>今天给服务器安装了nginx，并配置了ssl，网址左边终于有萌萌哒的小绿锁了，这里还是做一下记录。</p>
 <a id="more"></a>
 <p>先是安装nginx</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="comment">//nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span></span><br><span class="line">rpm -ivh nginx-release-centos-<span class="number">7</span>-<span class="number">0</span><span class="class">.el7</span><span class="class">.ngx</span><span class="class">.noarch</span><span class="class">.rpm</span></span><br><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
@@ -33,14 +67,30 @@
 <li><a href="http://www.oschina.net/translate/strong_ssl_security_on_nginx" target="_blank" rel="external">http://www.oschina.net/translate/strong_ssl_security_on_nginx</a></li>
 <li><a href="http://blog.jobbole.com/44844/" target="_blank" rel="external">http://blog.jobbole.com/44844/</a></li>
 </ul>
-</div></article></div></section><footer><div class="paginator"><a class="prev"> </a><a href="/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/" class="next">下一篇</a></div><div data-thread-key="2015/12/20/config-ssl-in-nginx/" data-title="nginx配置ssl" data-url="http://ppxu.me/2015/12/20/config-ssl-in-nginx/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"ppxu"};
-(function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-})();
 
-</script></footer><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src ="//hm.baidu.com/hm.js?3acd3117bffe31f23c04e3b8fec963fc";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script></body></html>
+                </div>
+              </article>
+            </div>
+    </section>
+    <footer>
+            <div class="paginator"><a class="prev"> </a><a href="/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/" class="next">下一篇</a>
+            </div>
+      <div data-thread-key="2015/12/20/config-ssl-in-nginx/" data-title="nginx配置ssl" data-url="http://ppxu.me/2015/12/20/config-ssl-in-nginx/" data-author-key="1" class="ds-thread"></div>
+      <script>
+        var duoshuoQuery = {short_name:"ppxu"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+             || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        
+        
+      </script>
+    </footer>
+    <script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src ="//hm.baidu.com/hm.js?3acd3117bffe31f23c04e3b8fec963fc";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();
+    </script>
+  </body>
+</html>
