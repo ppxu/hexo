@@ -7,7 +7,7 @@ tags: [github, webhooks, hexo, deploy, shell]
 
 <!--more-->
 
-这里有两个环节：
+这里会有两个环节：
 
 1. 本地代码自动部署到github
 
