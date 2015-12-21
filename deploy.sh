@@ -8,4 +8,4 @@ d=`date +%x-%T`
 git add .
 git commit -am "auto deploy at "${d}
 echo "git push..."
-git pusn origin master
+git push origin master
