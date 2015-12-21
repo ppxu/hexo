@@ -89,7 +89,9 @@ The plain HTTP request was sent to HTTPS port
 error_page 497  https://$host$uri;
 {% endcodeblock %}
 
-这样我们的网站就已经完全支持了HTTPS访问，可以在这个网站[https://www.ssllabs.com/ssltest/analyze.html](https://www.ssllabs.com/ssltest/analyze.html)对网页进行安全评测，如果评分不够高的话可以再看看如何[加强nginx的SSL安全](http://www.oschina.net/translate/strong_ssl_security_on_nginx)
+这样我们的网站就已经完全支持了HTTPS访问，可以在这个网站[https://www.ssllabs.com/ssltest/analyze.html](https://www.ssllabs.com/ssltest/analyze.html)对网页进行安全评测，如果评分不够高的话可以再看看如何[加强nginx的SSL安全](http://www.oschina.net/translate/strong_ssl_security_on_nginx)。
+
+![http://7xpbfd.com1.z0.glb.clouddn.com/ssl.png](http://7xpbfd.com1.z0.glb.clouddn.com/ssl.png)
 
 #### 参考资料
 

@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://ppxu.me/"/>
-  <updated>2015-12-21T02:40:30.000Z</updated>
+  <updated>2015-12-21T03:32:38.000Z</updated>
   <id>http://ppxu.me/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://ppxu.me/2015/12/20/config-ssl-in-nginx/"/>
     <id>http://ppxu.me/2015/12/20/config-ssl-in-nginx/</id>
     <published>2015-12-20T14:01:05.000Z</published>
-    <updated>2015-12-21T02:40:30.000Z</updated>
+    <updated>2015-12-21T03:32:38.000Z</updated>
     <content type="html"><![CDATA[<p>今天给服务器安装了nginx，并配置了ssl，网址左边终于有萌萌哒的小绿锁了，这里还是做一下记录。</p>
 <a id="more"></a>
 <p>先是安装nginx</p>
@@ -38,7 +38,8 @@
 <figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">The</span> plain <span class="type">HTTP</span> request was sent to <span class="type">HTTPS</span> <span class="foreign"><span class="keyword">port</span></span></span><br></pre></td></tr></table></figure>
 <p>所以我们需要将http的请求强制使用https访问，这里有一个方法是使用497错误码做重定向，在<code>/etc/nginx/conf.d/default.conf</code>中添加一条错误规则</p>
 <figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_page <span class="number">497</span>  https://<span class="variable">$host</span><span class="variable">$uri</span>;</span><br></pre></td></tr></table></figure>
-<p>这样我们的网站就已经完全支持了HTTPS访问，可以在这个网站<a href="https://www.ssllabs.com/ssltest/analyze.html" target="_blank" rel="external">https://www.ssllabs.com/ssltest/analyze.html</a>对网页进行安全评测，如果评分不够高的话可以再看看如何<a href="http://www.oschina.net/translate/strong_ssl_security_on_nginx" target="_blank" rel="external">加强nginx的SSL安全</a></p>
+<p>这样我们的网站就已经完全支持了HTTPS访问，可以在这个网站<a href="https://www.ssllabs.com/ssltest/analyze.html" target="_blank" rel="external">https://www.ssllabs.com/ssltest/analyze.html</a>对网页进行安全评测，如果评分不够高的话可以再看看如何<a href="http://www.oschina.net/translate/strong_ssl_security_on_nginx" target="_blank" rel="external">加强nginx的SSL安全</a>。</p>
+<p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/ssl.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/ssl.png"></p>
 <h4 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
 <li><a href="http://codybonney.com/installing-nginx-on-centos-6-4/" target="_blank" rel="external">http://codybonney.com/installing-nginx-on-centos-6-4/</a></li>
 <li><a href="http://www.tuijiankan.com/2015/05/04/%E9%98%BF%E9%87%8C%E4%BA%91Centos6%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AENodejs%E3%80%81Nginx%E3%80%81Hexo%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/" target="_blank" rel="external">http://www.tuijiankan.com/2015/05/04/阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录/</a></li>
