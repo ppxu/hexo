@@ -3,7 +3,7 @@ date: 2015-12-21 17:29:24
 categories: blog
 tags: [github, webhooks, hexo, deploy, shell]
 ---
-博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，pull下来，每次都要这样操作一遍实在麻烦，今天尝试使用Github的Webhooks功能实现了hexo的自动部署，过程记录如下。
+博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了hexo博客的自动部署，过程记录如下。
 
 <!--more-->
 

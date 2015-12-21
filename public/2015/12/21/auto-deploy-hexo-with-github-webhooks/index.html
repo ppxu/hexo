@@ -5,10 +5,10 @@
     <meta name="X-UA-Compatible" content="IE=edge">
     <title>使用Github的Webhooks实现hexo的自动部署 · PPxu is me
     </title>
-    <meta name="description" content="博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，pull下来，每次都要这样操作一遍实在麻烦，今天尝试使用Github的Webhooks功能实现了hexo的自动部署，过程记录如下。
+    <meta name="description" content="博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了hexo博客的自动部署，过程记录如下。
 
 整个过程有两个环节：
-本地代码自动部署到Githubhexo本身就有deploy功能，只要在_config.yml里面做一下配置，就可以部署到Github、Heroku等平台上，如果博客是托管在Github Pages上的话使用这种方式可以很方便的实现自动部署，不过通过这种方式发送到Github上的只有publi">
+本地代码自动部署到Githubhexo本身就有deploy功能，只要在_config.yml里面做一下配置，就可以部署到Github、Heroku等平台上，如果博客是托管在Github Pages上的话使用这种方式可以很方便的实现自动部署，不过通过这种方式发送到Github上的只有p">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="short icon" href="/favicon.png">
     <link rel="stylesheet" href="/css/apollo.css">
@@ -35,7 +35,7 @@
                         <div class="post-time">2015年12月21日
                         </div>
                       </div>
-                <div class="post-content"><p>博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，pull下来，每次都要这样操作一遍实在麻烦，今天尝试使用Github的Webhooks功能实现了hexo的自动部署，过程记录如下。</p>
+                <div class="post-content"><p>博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了hexo博客的自动部署，过程记录如下。</p>
 <a id="more"></a>
 <p>整个过程有两个环节：</p>
 <h3 id="u672C_u5730_u4EE3_u7801_u81EA_u52A8_u90E8_u7F72_u5230Github"><a href="#u672C_u5730_u4EE3_u7801_u81EA_u52A8_u90E8_u7F72_u5230Github" class="headerlink" title="本地代码自动部署到Github"></a>本地代码自动部署到Github</h3><p>hexo本身就有deploy功能，只要在<code>_config.yml</code>里面做一下<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">配置</a>，就可以部署到Github、Heroku等平台上，如果博客是托管在Github Pages上的话使用这种方式可以很方便的实现自动部署，不过通过这种方式发送到Github上的只有<code>public</code>目录，我这里希望托管整个应用的代码，就不能使用这种方式了，反正只要可以push就行了，我们搬出shell大法好。</p>
