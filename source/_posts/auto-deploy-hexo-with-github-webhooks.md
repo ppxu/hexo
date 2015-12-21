@@ -4,3 +4,9 @@ categories: blog
 tags: [github, webhooks, hexo, deploy, shell]
 ---
 使用github的webhooks实现hexo的自动部署
+
+<!--more-->
+
+1. 本地代码自动部署到github
+
+2. github自动同步到服务器
