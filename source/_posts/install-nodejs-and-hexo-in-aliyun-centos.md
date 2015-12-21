@@ -3,7 +3,7 @@ date: 2015-12-19 10:31:27
 categories: blog
 tags: [aliyun, ecs, centos, nodejs, hexo]
 ---
-最近刚撸了个阿里云ECS服务器来折腾，先搭个hexo博客，这里记录一下操作步骤。
+最近刚撸了个阿里云ECS服务器来折腾，先搭个hexo博客耍耍，这里记录一下操作步骤。
 
 <!--more-->
 
@@ -77,7 +77,7 @@ hexo server    //普通启动
 hexo server &  //静默启动
 {% endcodeblock %}
 
-启动成功后就可以通过服务器的ip地址`xx.xx.xx.xx:4000`访问到页面了，当然我们并不想输端口号，所以最好把4000转到80上，这次先没有用上nginx的反向代理，只是用iptables做了一下转发处理。
+启动成功后就可以通过服务器的ip地址`xx.xx.xx.xx:4000`访问到页面了，然后需要把4000转到80上，通常做法是用nginx做反向代理，这里先用iptables防火墙简单做一下转发处理。
 
 * 转到80端口
 
@@ -104,7 +104,7 @@ COMMIT
 service iptables restart
 {% endcodeblock %}
 
-然后就发现报错了
+这时发现报错了
 
 {% codeblock %}
 Failed to restart iptables.service: Unit iptables.service failed to load: No such file or directory.
@@ -120,7 +120,7 @@ systemctl enable iptables
 service iptables start
 {% endcodeblock %}
 
-这样就可以通过ip地址`xx.xx.xx.xx`访问网站了。
+这样就可以通过ip地址`xx.xx.xx.xx`直接访问网站了。
 
 * 域名解析
 

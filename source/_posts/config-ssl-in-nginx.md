@@ -1,4 +1,4 @@
-title: nginx配置ssl
+title: 配置nginx和ssl
 date: 2015-12-20 22:01:05
 categories: blog
 tags: [aliyun, ecs, centos, nginx, ssl, https]
@@ -21,7 +21,7 @@ yum install nginx
 systemctl start nginx
 {% endcodeblock %}
 
-这样nginx服务就已经可以访问了，然后我们需要把hexo服务的4000端口转发到nginx的80端口，修改`/etc/nginx/conf.d/default.conf`
+这样nginx服务就已经可以访问了，输入服务器ip地址就可以看到nginx主页，然后我们需要把hexo服务的4000端口转发到nginx的80端口，查看nginx配置文件`/etc/nginx/nginx.conf`，看到需要修改`conf.d`目录下的`/etc/nginx/conf.d/default.conf`文件
 
 {% codeblock %}
 server {
@@ -59,7 +59,6 @@ server {
     ssl on;
     ssl_certificate /etc/nginx/conf.d/ppxu.crt;
     ssl_certificate_key /etc/nginx/conf.d/ppxu.key;
-    ssl_session_timeout 5m;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
     ssl_ciphers 'AES128+EECDH:AES128+EDH:!aNULL';
     ssl_prefer_server_ciphers on;
@@ -68,13 +67,7 @@ server {
     ssl_stapling on;
     ssl_stapling_verify on;
 
-    resolver 8.8.4.4 8.8.8.8 valid=300s;
-    resolver_timeout 10s;
-    add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
-
     location / {
-        # root   /usr/share/nginx/html;
-        # index  index.html index.htm;
         proxy_pass          http://127.0.0.1:4000/;
         proxy_redirect      off;
         proxy_set_header    X-Real-IP       $remote_addr;
@@ -84,13 +77,13 @@ server {
     ...
 {% endcodeblock %}
 
-重启nginx，如果一切顺利，现在就可以通过`https://ppxu.me`访问到本网站了，但是直接输入`ppxu.me`会报400错误，显示
+重启nginx，如果一切顺利，现在就可以通过`https://ppxu.me`访问到本网站了，但是直接如果直接输入`ppxu.me`的话会报400错误，显示
 
 {% codeblock %}
 The plain HTTP request was sent to HTTPS port
 {% endcodeblock %}
 
-我们需要将http的请求强制使用https访问，这里有一个方法是使用497错误码做重定向，在`/etc/nginx/conf.d/default.conf`中添加
+所以我们需要将http的请求强制使用https访问，这里有一个方法是使用497错误码做重定向，在`/etc/nginx/conf.d/default.conf`中添加一条错误规则
 
 {% codeblock %}
 error_page 497  https://$host$uri;
@@ -111,3 +104,4 @@ error_page 497  https://$host$uri;
 * [http://www.tutugreen.com/wordpress/upgrade-ssl/](http://www.tutugreen.com/wordpress/upgrade-ssl/)
 * [http://www.oschina.net/translate/strong_ssl_security_on_nginx](http://www.oschina.net/translate/strong_ssl_security_on_nginx)
 * [http://blog.jobbole.com/44844/](http://blog.jobbole.com/44844/)
+* [http://blog.jobbole.com/80591/](http://blog.jobbole.com/80591/)
