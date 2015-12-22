@@ -83,7 +83,13 @@ server {
 The plain HTTP request was sent to HTTPS port
 {% endcodeblock %}
 
-所以我们需要将http的请求强制使用https访问，这里有一个方法是使用497错误码做重定向，在`/etc/nginx/conf.d/default.conf`中添加一条错误规则
+所以我们需要将http的请求强制使用https访问，最方便的办法是启用HSTS，在nginx的配置中添加
+
+{% codeblock %}
+add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+{% endcodeblock %}
+
+这样只要是支持HSTS的浏览器，就可以自动完成http到https的替换，而且是直接在浏览器本地完成的，对于不支持的浏览器，只能在服务器做重定向了，继续在nginx配置中添加一条规则
 
 {% codeblock %}
 error_page 497  https://$host$uri;
@@ -98,6 +104,8 @@ error_page 497  https://$host$uri;
 * [http://codybonney.com/installing-nginx-on-centos-6-4/](http://codybonney.com/installing-nginx-on-centos-6-4/)
 * [http://www.tuijiankan.com/2015/05/04/阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录/](http://www.tuijiankan.com/2015/05/04/%E9%98%BF%E9%87%8C%E4%BA%91Centos6%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AENodejs%E3%80%81Nginx%E3%80%81Hexo%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95/)
 * [http://www.barretlee.com/blog/2015/10/05/how-to-build-a-https-server/](http://www.barretlee.com/blog/2015/10/05/how-to-build-a-https-server/)
+* [https://imququ.com/post/switch-to-https.html](https://imququ.com/post/switch-to-https.html)
+* [https://imququ.com/post/sth-about-switch-to-https.html](https://imququ.com/post/sth-about-switch-to-https.html)
 * [http://www.ha97.com/5194.html](http://www.ha97.com/5194.html)
 * [http://www.cnblogs.com/yanghuahui/archive/2012/06/25/2561568.html](http://www.cnblogs.com/yanghuahui/archive/2012/06/25/2561568.html)
 * [http://www.codeceo.com/article/nginx-ssl-nodejs.html](http://www.codeceo.com/article/nginx-ssl-nodejs.html)
