@@ -1,0 +1,52 @@
+title: nginx配置SPDY
+date: 2015-12-22 17:32:20
+categories: blog
+tags: [aliyun, ecs, centos, nginx, spdy]
+---
+本来准备给服务器搞个HTTP/2上去，发现nginx要到1.9.5才可以支持HTTP/2协议，现在服务器上的nginx版本才1.8.0，想了想先试试SPDY吧，改天再来升级nginx和HTTP/2。
+
+<!--more-->
+
+首先查看一下本地的nginx是不是已经包含了SPDY
+
+{% codeblock %}
+nginx -V |grep spdy
+{% endcodeblock %}
+
+如果看到有`–-with-http_spdy_module`，就说明已经支持了SPDY，如果没有的话需要重新下载和编译nginx，在编译的时候加上`--with-http_spdy_module`选项。
+
+然后修改nginx的配置文件
+
+{% codeblock %}
+server {
+    listen       80;
+    listen       443 ssl spdy;
+    server_name  ppxu.me *.ppxu.me;
+
+    add_header   Alternate-Protocol  443:npn-spdy/3.1;
+    ...
+{% endcodeblock %}
+
+重启nginx，SPDY就启动成功了。
+
+访问网站，然后在chrome中打开`chrome://net-internals/#http2`，就可以看到站点已经支持了SPDY3.1
+
+![http://7xpbfd.com1.z0.glb.clouddn.com/spdy.png](http://7xpbfd.com1.z0.glb.clouddn.com/spdy.png)
+
+还可以在这个[网站](https://spdycheck.org/)检查SPDY启动情况。
+
+不过SPDY协议已经废弃了，还是赶紧搞上HTTP/2才是正事。
+
+#### 参考资料
+
+* [http://nginx.org/](http://nginx.org/)
+
+* [http://www.stefanwille.com/2013/04/using-spdy-with-nginx-1-4/](http://www.stefanwille.com/2013/04/using-spdy-with-nginx-1-4/)
+
+* [http://www.linuxidc.com/Linux/2015-09/123251.htm](http://www.linuxidc.com/Linux/2015-09/123251.htm)
+
+* [http://www.linuxidc.com/Linux/2015-02/112979.htm](http://www.linuxidc.com/Linux/2015-02/112979.htm)
+
+* [http://www.jb51.net/article/59017.htm](http://www.jb51.net/article/59017.htm)
+
+* [http://www.tuicool.com/articles/2mi63q](http://www.tuicool.com/articles/2mi63q)
