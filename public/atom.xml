@@ -260,11 +260,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[阿里云ECS搭建hexo]]></title>
+    <title><![CDATA[阿里云ECS搭建Hexo]]></title>
     <link href="https://ppxu.me/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/"/>
     <id>https://ppxu.me/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/</id>
     <published>2015-12-19T02:31:27.000Z</published>
-    <updated>2015-12-23T13:44:22.000Z</updated>
+    <updated>2015-12-23T13:47:51.000Z</updated>
     <content type="html"><![CDATA[<p>最近刚撸了个阿里云ECS服务器来折腾，先搭个Hexo博客耍耍，这里记录一下操作步骤。</p>
 <a id="more"></a>
 <p>撸主选的是最便宜的阿里云ECS，应付日常小撸应该足够了，具体配置如下：</p>

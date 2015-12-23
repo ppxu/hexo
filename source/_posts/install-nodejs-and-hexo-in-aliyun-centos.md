@@ -1,4 +1,4 @@
-title: 阿里云ECS搭建hexo
+title: 阿里云ECS搭建Hexo
 date: 2015-12-19 10:31:27
 categories: blog
 tags: [aliyun, ecs, centos, nodejs, hexo]
