@@ -21,7 +21,7 @@ CPU：1核
 * 连接服务器
 
 {% codeblock %}
-ssh root@xx.xx.xx.xx
+# ssh root@xx.xx.xx.xx
 {% endcodeblock %}
 
 * 安装Nodejs环境
@@ -29,52 +29,51 @@ ssh root@xx.xx.xx.xx
   * 更新软件源
 
   {% codeblock %}
-  yum -y update
+  # yum -y update
   {% endcodeblock %}
 
   * 下载Nodejs
 
   {% codeblock %}
-  cd /usr/local/src
-  wget http://nodejs.org/dist/node-latest.tar.gz
+  # cd /usr/local/src
+  # wget http://nodejs.org/dist/node-latest.tar.gz
   {% endcodeblock %}
 
   * 解压
 
   {% codeblock %}
-  tar zxf node-latest.tar.gz
-  cd node-v*.*.*
+  # tar zxf node-latest.tar.gz
+  # cd node-v*.*.*
   {% endcodeblock %}
 
   * 编译安装
 
   {% codeblock %}
-  ./configure
-  make
-  make install
+  # ./configure
+  # make && make install
   {% endcodeblock %}
 
   * 确认安装成功
 
   {% codeblock %}
-  node -v
-  npm -v
+  # node -v
+  # npm -v
   {% endcodeblock %}
 
 * 安装hexo
 
 {% codeblock %}
-npm install -g hexo-cli
-hexo init blog
-cd blog
-npm install
+# npm install -g hexo-cli
+# hexo init blog
+# cd blog
+# npm install
 {% endcodeblock %}
 
 * 启动hexo
 
 {% codeblock %}
-hexo server    //普通启动
-hexo server &  //静默启动
+# hexo server    //普通启动
+# hexo server &  //静默启动
 {% endcodeblock %}
 
 启动成功后就可以通过服务器的ip地址`xx.xx.xx.xx:4000`访问到页面了，然后需要把4000转到80上，通常做法是用nginx做反向代理，这里先用iptables防火墙简单做一下转发处理。
@@ -84,7 +83,7 @@ hexo server &  //静默启动
 编辑iptables文件
 
 {% codeblock %}
-vi /etc/sysconfig/iptables
+# vi /etc/sysconfig/iptables
 {% endcodeblock %}
 
 加上下面这段
@@ -101,7 +100,7 @@ COMMIT
 重启iptables服务
 
 {% codeblock %}
-service iptables restart
+# service iptables restart
 {% endcodeblock %}
 
 这时发现报错了
@@ -113,11 +112,11 @@ Failed to restart iptables.service: Unit iptables.service failed to load: No suc
 查了一下原来是CentOS 7中的防火墙改成了firewalld，所以要换回iptables。
 
 {% codeblock %}
-systemctl stop firewalld
-systemctl mask firewalld
-yum install iptables-services
-systemctl enable iptables
-service iptables start
+# systemctl stop firewalld
+# systemctl mask firewalld
+# yum install iptables-services
+# systemctl enable iptables
+# service start iptables
 {% endcodeblock %}
 
 这样就可以通过ip地址`xx.xx.xx.xx`直接访问网站了。

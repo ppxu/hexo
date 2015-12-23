@@ -33,13 +33,13 @@ echo -e "\033[32m [AUTO DEPLOY] deploy hexo finish \033[0m"
 然后增加权限
 
 {% codeblock %}
-chmod +x ./deploy.sh
+# chmod +x ./deploy.sh
 {% endcodeblock %}
 
 这样完成本地开发后，只要执行命令
 
 {% codeblock %}
-./deploy.sh
+# ./deploy.sh
 {% endcodeblock %}
 
 就可以让hexo生成静态文件并push到Github上。
@@ -106,7 +106,7 @@ handler.on('push', function (event) {
 然后启动服务
 
 {% codeblock %}
-node server.js &
+# node server.js &
 {% endcodeblock %}
 
 这里也可以用forever之类的工具防止进程挂掉。

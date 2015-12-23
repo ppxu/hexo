@@ -10,15 +10,15 @@ tags: [aliyun, ecs, centos, nginx, ssl, https]
 先是安装nginx
 
 {% codeblock %}
-wget http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
-rpm -ivh nginx-release-centos-7-0.el7.ngx.noarch.rpm
-yum install nginx
+# wget http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+# rpm -ivh nginx-release-centos-7-0.el7.ngx.noarch.rpm
+# yum install nginx
 {% endcodeblock %}
 
 启动nginx
 
 {% codeblock %}
-systemctl start nginx
+# systemctl start nginx
 {% endcodeblock %}
 
 这样nginx服务就已经可以访问了，输入服务器ip地址就可以看到nginx主页，然后我们需要把hexo服务的4000端口转发到nginx的80端口，查看nginx配置文件`/etc/nginx/nginx.conf`，看到需要修改`conf.d`目录下的`/etc/nginx/conf.d/default.conf`文件
@@ -41,7 +41,7 @@ server {
 重启nginx
 
 {% codeblock %}
-systemctl restart nginx
+# systemctl restart nginx
 {% endcodeblock %}
 
 现在访问网站，在响应头里就可以看到`Server:nginx/1.8.0`，说明nginx环境已经正常了，下面准备搞上HTTPS。

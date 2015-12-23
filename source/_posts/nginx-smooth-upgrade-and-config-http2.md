@@ -9,7 +9,7 @@ tags: [aliyun, ecs, centos, nginx, http2]
 1. 检查当前nginx版本和配置参数
 
   {% codeblock %}
-  nginx -V
+  # nginx -V
   nginx version: nginx/1.8.0
   built by gcc 4.8.2 20140120 (Red Hat 4.8.2-16) (GCC)
   built with OpenSSL 1.0.1e-fips 11 Feb 2013
@@ -22,32 +22,32 @@ tags: [aliyun, ecs, centos, nginx, http2]
 2. 安装PCRE，nginx的rewrite模块依赖PCRE
 
   {% codeblock %}
-  cd /ppxu
-  yum -y install make zlib zlib-devel gcc-c++ libtool
-  wget http://nchc.dl.sourceforge.net/project/pcre/pcre/8.37/pcre-8.37.tar.gz
-  tar zxvf pcre-8.37.tar.gz
-  cd pcre-8.37/
-  ./configure
-  make && make install
+  # cd /ppxu
+  # yum -y install make zlib zlib-devel gcc-c++ libtool
+  # wget http://nchc.dl.sourceforge.net/project/pcre/pcre/8.37/pcre-8.37.tar.gz
+  # tar zxvf pcre-8.37.tar.gz
+  # cd pcre-8.37/
+  # ./configure
+  # make && make install
   {% endcodeblock %}
 
 3. 下载openssl，可以从[OpenSSL](https://www.openssl.org/)或者[LibreSSL](http://www.libressl.org/)下载
 
   {% codeblock %}
-  cd /ppxu
-  wget http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.3.1.tar.gz
-  tar zxvf libressl-2.3.1.tar.gz
+  # cd /ppxu
+  # wget http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.3.1.tar.gz
+  # tar zxvf libressl-2.3.1.tar.gz
   {% endcodeblock %}
 
 4. 下载，配置并编译nginx
 
   {% codeblock %}
-  cd /ppxu
-  wget http://nginx.org/download/nginx-1.9.9.tar.gz
-  tar zxvf nginx-1.9.9.tar.gz
-  cd nginx-1.9.9/
-  ./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-openssl=../libressl-2.3.1 --with-http_v2_module --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-http_auth_request_module --with-mail --with-mail_ssl_module --with-file-aio --with-ipv6 --with-cc-opt='-O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic'
-  make
+  # cd /ppxu
+  # wget http://nginx.org/download/nginx-1.9.9.tar.gz
+  # tar zxvf nginx-1.9.9.tar.gz
+  # cd nginx-1.9.9/
+  # ./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --user=nginx --group=nginx --with-openssl=../libressl-2.3.1 --with-http_v2_module --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module --with-http_auth_request_module --with-mail --with-mail_ssl_module --with-file-aio --with-ipv6 --with-cc-opt='-O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic'
+  # make
   {% endcodeblock %}
 
   其中的`--with-http_v2_module`就是开启HTTP/2的设置。
@@ -55,18 +55,18 @@ tags: [aliyun, ecs, centos, nginx, http2]
 5. 替换nginx
 
   {% codeblock %}
-  which nginx    //查找nginx路径
-  mv /usr/sbin/nginx /usr/sbin/nginx.old    //备份旧版nginx
-  cp objs/nginx /usr/sbin/    //将编译好的新版nginx复制过去
+  # which nginx    //查找nginx路径
+  # mv /usr/sbin/nginx /usr/sbin/nginx.old    //备份旧版nginx
+  # cp objs/nginx /usr/sbin/    //将编译好的新版nginx复制过去
   {% endcodeblock %}
 
 6. 确认更新生效
 
   {% codeblock %}
-  /usr/sbin/nginx -t
+  # /usr/sbin/nginx -t
   nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
   nginx: configuration file /etc/nginx/nginx.conf test is successful
-  /usr/sbin/nginx -v
+  # /usr/sbin/nginx -v
   nginx version: nginx/1.9.9
   {% endcodeblock %}
 

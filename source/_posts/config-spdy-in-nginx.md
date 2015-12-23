@@ -10,7 +10,7 @@ tags: [aliyun, ecs, centos, nginx, spdy]
 首先查看一下本地的nginx是不是已经包含了SPDY
 
 {% codeblock %}
-nginx -V |grep spdy
+# nginx -V |grep spdy
 {% endcodeblock %}
 
 如果看到有`–-with-http_spdy_module`，就说明已经支持了SPDY，如果没有的话需要重新下载和编译nginx，在编译的时候加上`--with-http_spdy_module`选项。
