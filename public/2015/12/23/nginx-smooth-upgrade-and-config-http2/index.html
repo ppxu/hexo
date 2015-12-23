@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <title>平滑升级nginx并配置HTTP/2 · PPxu is me
+    </title>
+    <meta name="description" content="话说SPDY已经被HTTP/2上位了，网站继续用SPDY也不合适，今天就趁空升级了最新的nginx，并开启了HTTP/2，下面是操作过程
+
+检查当前nginx版本和配置参数
+123&lt;span cl">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <link rel="short icon" href="/favicon.png">
+    <link rel="stylesheet" href="/css/apollo.css">
+  </head>
+  <body>
+    <header><a href="/" class="logo-link"><img src="/favicon.png"></a>
+      <ul class="nav nav-list">
+        <li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">博客</a>
+        </li>
+        <li class="nav-list-item"><a href="http://weibo.com/ppxu" target="_blank" class="nav-list-link">微博</a>
+        </li>
+        <li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a>
+        </li>
+        <li class="nav-list-item"><a href="https://github.com/ppxu" target="_blank" class="nav-list-link">GITHUB</a>
+        </li>
+      </ul>
+    </header>
+    <section class="container">
+            <div class="post">
+              <article class="post-block">
+                <h1 class="post-title">平滑升级nginx并配置HTTP/2
+                </h1>
+                      <div class="post-meta">
+                        <div class="post-time">2015年12月23日
+                        </div>
+                      </div>
+                <div class="post-content"><p>话说SPDY已经被HTTP/2上位了，网站继续用SPDY也不合适，今天就趁空升级了最新的nginx，并开启了HTTP/2，下面是操作过程<br><a id="more"></a></p>
+<ol>
+<li><p>检查当前nginx版本和配置参数</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nginx -<span class="constant">V</span></span><br><span class="line">nginx <span class="symbol">version:</span> nginx/<span class="number">1.8</span>.<span class="number">0</span></span><br><span class="line">built by gcc <span class="number">4.8</span>.<span class="number">2</span> <span class="number">20140120</span> (<span class="constant">Red</span> <span class="constant">Hat</span> <span class="number">4.8</span>.<span class="number">2</span>-<span class="number">16</span>) (<span class="constant">GCC</span>)</span><br><span class="line">built <span class="keyword">with</span> <span class="constant">OpenSSL</span> <span class="number">1.0</span>.<span class="number">1</span>e-fips <span class="number">11</span> <span class="constant">Feb</span> <span class="number">2013</span></span><br><span class="line"><span class="constant">TLS</span> <span class="constant">SNI</span> support enabled</span><br><span class="line">configure <span class="symbol">arguments:</span> --prefix=<span class="regexp">/etc/nginx</span> --sbin-path=<span class="regexp">/usr/sbin</span><span class="regexp">/nginx --conf-path=/etc</span><span class="regexp">/nginx/nginx</span>.conf --error-log-path=<span class="regexp">/var/log</span><span class="regexp">/nginx/error</span>.log --http-log-path=<span class="regexp">/var/log</span><span class="regexp">/nginx/access</span>.log --pid-path=<span class="regexp">/var/run</span><span class="regexp">/nginx.pid --lock-path=/var</span><span class="regexp">/run/nginx</span>.lock --http-client-body-temp-path=<span class="regexp">/var/cache</span><span class="regexp">/nginx/client</span>_temp --http-proxy-temp-path=<span class="regexp">/var/cache</span><span class="regexp">/nginx/proxy</span>_temp --http-fastcgi-temp-path=<span class="regexp">/var/cache</span><span class="regexp">/nginx/fastcgi</span>_temp --http-uwsgi-temp-path=<span class="regexp">/var/cache</span><span class="regexp">/nginx/uwsgi</span>_temp --http-scgi-temp-path=<span class="regexp">/var/cache</span><span class="regexp">/nginx/scgi</span>_temp --user=nginx --group=nginx --<span class="keyword">with</span>-openssl=../libressl-<span class="number">2.2</span>.<span class="number">2</span> --<span class="keyword">with</span>-http_v2_module --<span class="keyword">with</span>-http_ssl_module --<span class="keyword">with</span>-http_realip_module --<span class="keyword">with</span>-http_addition_module --<span class="keyword">with</span>-http_sub_module --<span class="keyword">with</span>-http_dav_module --<span class="keyword">with</span>-http_flv_module --<span class="keyword">with</span>-http_mp4_module --<span class="keyword">with</span>-http_gunzip_module --<span class="keyword">with</span>-http_gzip_static_module --<span class="keyword">with</span>-http_random_index_module --<span class="keyword">with</span>-http_secure_link_module --<span class="keyword">with</span>-http_stub_status_module --<span class="keyword">with</span>-http_auth_request_module --<span class="keyword">with</span>-mail --<span class="keyword">with</span>-mail_ssl_module --<span class="keyword">with</span>-file-aio --<span class="keyword">with</span>-ipv6 --<span class="keyword">with</span>-http_spdy_module --<span class="keyword">with</span>-cc-opt=<span class="string">'-O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic'</span></span><br></pre></td></tr></table></figure>
+<p>记下这里的configure arguments，后面编译的时候要用的。</p>
+</li>
+<li><p>安装PCRE，nginx的rewrite模块依赖PCRE</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /ppxu</span><br><span class="line">yum -y <span class="operator"><span class="keyword">install</span> make zlib zlib-devel gcc-<span class="keyword">c</span>++ libtool</span><br><span class="line">wget <span class="keyword">http</span>://nchc.dl.sourceforge.net/<span class="keyword">project</span>/pcre/pcre/<span class="number">8.37</span>/pcre-<span class="number">8.37</span>.tar.gz</span><br><span class="line">tar zxvf pcre-<span class="number">8.37</span>.tar.gz</span><br><span class="line">cd pcre-<span class="number">8.37</span>/</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make <span class="keyword">install</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载openssl，可以从<a href="https://www.openssl.org/" target="_blank" rel="external">OpenSSL</a>或者<a href="http://www.libressl.org/" target="_blank" rel="external">LibreSSL</a>下载</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /ppxu</span><br><span class="line">wget http:<span class="comment">//ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.3.1.tar.gz</span></span><br><span class="line">tar zxvf libressl-<span class="number">2.3</span>.<span class="number">1</span><span class="class">.tar</span><span class="class">.gz</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载，配置并编译nginx</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /ppxu</span><br><span class="line">wget <span class="symbol">http:</span>/<span class="regexp">/nginx.org/download</span><span class="regexp">/nginx-1.9.9.tar.gz</span><br><span class="line">tar zxvf nginx-1.9.9.tar.gz</span><br><span class="line">cd nginx-1.9.9/</span></span><br><span class="line">./configure --prefix=<span class="regexp">/etc/nginx</span> --sbin-path=<span class="regexp">/usr/sbin</span><span class="regexp">/nginx --conf-path=/etc</span><span class="regexp">/nginx/nginx</span>.conf --error-log-path=<span class="regexp">/var/log</span><span class="regexp">/nginx/error</span>.log --http-log-path=<span class="regexp">/var/log</span><span class="regexp">/nginx/access</span>.log --pid-path=<span class="regexp">/var/run</span><span class="regexp">/nginx.pid --lock-path=/var</span><span class="regexp">/run/nginx</span>.lock --http-client-body-temp-path=<span class="regexp">/var/cache</span><span class="regexp">/nginx/client</span>_temp --http-proxy-temp-path=<span class="regexp">/var/cache</span><span class="regexp">/nginx/proxy</span>_temp --http-fastcgi-temp-path=<span class="regexp">/var/cache</span><span class="regexp">/nginx/fastcgi</span>_temp --http-uwsgi-temp-path=<span class="regexp">/var/cache</span><span class="regexp">/nginx/uwsgi</span>_temp --http-scgi-temp-path=<span class="regexp">/var/cache</span><span class="regexp">/nginx/scgi</span>_temp --user=nginx --group=nginx --<span class="keyword">with</span>-openssl=../libressl-<span class="number">2.3</span>.<span class="number">1</span> --<span class="keyword">with</span>-http_v2_module --<span class="keyword">with</span>-http_ssl_module --<span class="keyword">with</span>-http_realip_module --<span class="keyword">with</span>-http_addition_module --<span class="keyword">with</span>-http_sub_module --<span class="keyword">with</span>-http_dav_module --<span class="keyword">with</span>-http_flv_module --<span class="keyword">with</span>-http_mp4_module --<span class="keyword">with</span>-http_gunzip_module --<span class="keyword">with</span>-http_gzip_static_module --<span class="keyword">with</span>-http_random_index_module --<span class="keyword">with</span>-http_secure_link_module --<span class="keyword">with</span>-http_stub_status_module --<span class="keyword">with</span>-http_auth_request_module --<span class="keyword">with</span>-mail --<span class="keyword">with</span>-mail_ssl_module --<span class="keyword">with</span>-file-aio --<span class="keyword">with</span>-ipv6 --<span class="keyword">with</span>-cc-opt=<span class="string">'-O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic'</span></span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>其中的<code>--with-http_v2_module</code>就是开启HTTP/2的设置。</p>
+</li>
+<li><p>替换nginx</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">which nginx    <span class="comment">//查找nginx路径</span></span><br><span class="line">mv <span class="regexp">/usr/</span>sbin<span class="regexp">/nginx /u</span>sr<span class="regexp">/sbin/</span>nginx.old    <span class="comment">//备份旧版nginx</span></span><br><span class="line">cp objs<span class="regexp">/nginx /u</span>sr<span class="regexp">/sbin/</span>    <span class="comment">//将编译好的新版nginx复制过去</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>确认更新生效</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>sbin/nginx -t</span><br><span class="line"><span class="string">nginx:</span> the configuration file <span class="regexp">/etc/</span>nginx/nginx.conf syntax is ok</span><br><span class="line"><span class="string">nginx:</span> configuration file <span class="regexp">/etc/</span>nginx/nginx.conf test is successful</span><br><span class="line"><span class="regexp">/usr/</span>sbin/nginx -v</span><br><span class="line">nginx <span class="string">version:</span> nginx/<span class="number">1.9</span><span class="number">.9</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新nginx配置文件</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80<span class="comment">;</span></span><br><span class="line">    listen       443 ssl http2<span class="comment">;</span></span><br><span class="line">    server_name  ppxu.me *.ppxu.me<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启nginx即可</p>
+</li>
+</ol>
+<p>访问网站，在响应头里可以看到<code>server:nginx/1.9.9</code>，同时，在<a href="chrome://net-internals/#http2" target="_blank" rel="external">chrome://net-internals/#http2</a>上面可以看到网站已经支持了HTTP/2</p>
+<p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/http2.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/http2.png"></p>
+<h4 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
+<li><a href="http://www.linuxde.net/2011/08/554.html" target="_blank" rel="external">http://www.linuxde.net/2011/08/554.html</a></li>
+<li><a href="http://www.linuxidc.com/Linux/2014-02/96137.htm" target="_blank" rel="external">http://www.linuxidc.com/Linux/2014-02/96137.htm</a></li>
+<li><a href="http://www.poluoluo.com/server/201403/265778.html" target="_blank" rel="external">http://www.poluoluo.com/server/201403/265778.html</a></li>
+<li><a href="https://imququ.com/post/http2-resource.html" target="_blank" rel="external">https://imququ.com/post/http2-resource.html</a></li>
+<li><a href="https://imququ.com/post/nginx-http2-patch.html" target="_blank" rel="external">https://imququ.com/post/nginx-http2-patch.html</a></li>
+<li><a href="http://www.tuicool.com/articles/3eeIVfi" target="_blank" rel="external">http://www.tuicool.com/articles/3eeIVfi</a></li>
+</ul>
+
+                </div>
+              </article>
+            </div>
+    </section>
+    <footer>
+            <div class="paginator"><a class="prev"> </a><a href="/2015/12/22/config-spdy-in-nginx/" class="next">下一篇</a>
+            </div>
+      <div data-thread-key="2015/12/23/nginx-smooth-upgrade-and-config-http2/" data-title="平滑升级nginx并配置HTTP/2" data-url="https://ppxu.me/2015/12/23/nginx-smooth-upgrade-and-config-http2/" data-author-key="1" class="ds-thread"></div>
+      <script>
+        var duoshuoQuery = {short_name:"ppxu"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+             || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        
+        
+      </script>
+      <div class="powered">
+        <p>Powered by<span>&nbsp;<a href="http://www.aliyun.com/" target="_blank">Aliyun</a></span><span>&nbsp;&</span><span>&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a></span></p>
+      </div>
+    </footer>
+    <script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src ="//hm.baidu.com/hm.js?3acd3117bffe31f23c04e3b8fec963fc";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();
+    </script>
+  </body>
+</html>

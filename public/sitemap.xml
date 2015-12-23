@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ppxu.me/2015/12/23/nginx-smooth-upgrade-and-config-http2/</loc>
+    <lastmod>2015-12-23T13:30:25.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ppxu.me/2015/12/20/config-ssl-in-nginx/</loc>
     <lastmod>2015-12-22T13:33:26.000Z</lastmod>
   </url>
