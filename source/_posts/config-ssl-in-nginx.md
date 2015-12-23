@@ -115,3 +115,4 @@ error_page 497  https://$host$uri;
 * [http://www.oschina.net/translate/strong_ssl_security_on_nginx](http://www.oschina.net/translate/strong_ssl_security_on_nginx)
 * [http://blog.jobbole.com/44844/](http://blog.jobbole.com/44844/)
 * [http://blog.jobbole.com/80591/](http://blog.jobbole.com/80591/)
+* [https://imququ.com/post/my-nginx-conf-for-wpo.html](https://imququ.com/post/my-nginx-conf-for-wpo.html)

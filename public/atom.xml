@@ -3,9 +3,9 @@
   <title><![CDATA[PPxu is me]]></title>
   
   <link href="/atom.xml" rel="self"/>
-  <link href="http://ppxu.me/"/>
+  <link href="https://ppxu.me/"/>
   <updated>2015-12-22T12:13:24.000Z</updated>
-  <id>http://ppxu.me/</id>
+  <id>https://ppxu.me/</id>
   
   <author>
     <name><![CDATA[PPxu]]></name>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[nginx配置SPDY]]></title>
-    <link href="http://ppxu.me/2015/12/22/config-spdy-in-nginx/"/>
-    <id>http://ppxu.me/2015/12/22/config-spdy-in-nginx/</id>
+    <link href="https://ppxu.me/2015/12/22/config-spdy-in-nginx/"/>
+    <id>https://ppxu.me/2015/12/22/config-spdy-in-nginx/</id>
     <published>2015-12-22T09:32:20.000Z</published>
     <updated>2015-12-22T12:13:24.000Z</updated>
     <content type="html"><![CDATA[<p>本来准备给服务器搞个HTTP/2上去，发现nginx要到1.9.5才可以支持HTTP/2协议，现在服务器上的nginx版本才1.8.0，想了想先试试SPDY吧，改天再来升级nginx和HTTP/2。</p>
@@ -52,24 +52,24 @@
     
     </summary>
     
-      <category term="aliyun" scheme="http://ppxu.me/tags/aliyun/"/>
+      <category term="aliyun" scheme="https://ppxu.me/tags/aliyun/"/>
     
-      <category term="centos" scheme="http://ppxu.me/tags/centos/"/>
+      <category term="centos" scheme="https://ppxu.me/tags/centos/"/>
     
-      <category term="ecs" scheme="http://ppxu.me/tags/ecs/"/>
+      <category term="ecs" scheme="https://ppxu.me/tags/ecs/"/>
     
-      <category term="nginx" scheme="http://ppxu.me/tags/nginx/"/>
+      <category term="nginx" scheme="https://ppxu.me/tags/nginx/"/>
     
-      <category term="spdy" scheme="http://ppxu.me/tags/spdy/"/>
+      <category term="spdy" scheme="https://ppxu.me/tags/spdy/"/>
     
-      <category term="blog" scheme="http://ppxu.me/categories/blog/"/>
+      <category term="blog" scheme="https://ppxu.me/categories/blog/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[使用Github的Webhooks实现hexo的自动部署]]></title>
-    <link href="http://ppxu.me/2015/12/21/auto-deploy-hexo-with-github-webhooks/"/>
-    <id>http://ppxu.me/2015/12/21/auto-deploy-hexo-with-github-webhooks/</id>
+    <link href="https://ppxu.me/2015/12/21/auto-deploy-hexo-with-github-webhooks/"/>
+    <id>https://ppxu.me/2015/12/21/auto-deploy-hexo-with-github-webhooks/</id>
     <published>2015-12-21T09:29:24.000Z</published>
     <updated>2015-12-21T13:35:52.000Z</updated>
     <content type="html"><![CDATA[<p>博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了hexo博客的自动部署，过程记录如下。</p>
@@ -114,26 +114,26 @@
     
     </summary>
     
-      <category term="deploy" scheme="http://ppxu.me/tags/deploy/"/>
+      <category term="deploy" scheme="https://ppxu.me/tags/deploy/"/>
     
-      <category term="github" scheme="http://ppxu.me/tags/github/"/>
+      <category term="github" scheme="https://ppxu.me/tags/github/"/>
     
-      <category term="hexo" scheme="http://ppxu.me/tags/hexo/"/>
+      <category term="hexo" scheme="https://ppxu.me/tags/hexo/"/>
     
-      <category term="shell" scheme="http://ppxu.me/tags/shell/"/>
+      <category term="shell" scheme="https://ppxu.me/tags/shell/"/>
     
-      <category term="webhooks" scheme="http://ppxu.me/tags/webhooks/"/>
+      <category term="webhooks" scheme="https://ppxu.me/tags/webhooks/"/>
     
-      <category term="blog" scheme="http://ppxu.me/categories/blog/"/>
+      <category term="blog" scheme="https://ppxu.me/categories/blog/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[阿里云ECS配置nginx和ssl]]></title>
-    <link href="http://ppxu.me/2015/12/20/config-ssl-in-nginx/"/>
-    <id>http://ppxu.me/2015/12/20/config-ssl-in-nginx/</id>
+    <link href="https://ppxu.me/2015/12/20/config-ssl-in-nginx/"/>
+    <id>https://ppxu.me/2015/12/20/config-ssl-in-nginx/</id>
     <published>2015-12-20T14:01:05.000Z</published>
-    <updated>2015-12-22T09:07:03.000Z</updated>
+    <updated>2015-12-22T13:33:26.000Z</updated>
     <content type="html"><![CDATA[<p>今天给服务器安装了nginx，并配置了ssl，网址左边终于有萌萌哒的小绿锁了，这里还是做一下记录。</p>
 <a id="more"></a>
 <p>先是安装nginx</p>
@@ -171,6 +171,7 @@
 <li><a href="http://www.oschina.net/translate/strong_ssl_security_on_nginx" target="_blank" rel="external">http://www.oschina.net/translate/strong_ssl_security_on_nginx</a></li>
 <li><a href="http://blog.jobbole.com/44844/" target="_blank" rel="external">http://blog.jobbole.com/44844/</a></li>
 <li><a href="http://blog.jobbole.com/80591/" target="_blank" rel="external">http://blog.jobbole.com/80591/</a></li>
+<li><a href="https://imququ.com/post/my-nginx-conf-for-wpo.html" target="_blank" rel="external">https://imququ.com/post/my-nginx-conf-for-wpo.html</a></li>
 </ul>
 ]]></content>
     <summary type="html">
@@ -178,26 +179,26 @@
     
     </summary>
     
-      <category term="aliyun" scheme="http://ppxu.me/tags/aliyun/"/>
+      <category term="aliyun" scheme="https://ppxu.me/tags/aliyun/"/>
     
-      <category term="centos" scheme="http://ppxu.me/tags/centos/"/>
+      <category term="centos" scheme="https://ppxu.me/tags/centos/"/>
     
-      <category term="ecs" scheme="http://ppxu.me/tags/ecs/"/>
+      <category term="ecs" scheme="https://ppxu.me/tags/ecs/"/>
     
-      <category term="https" scheme="http://ppxu.me/tags/https/"/>
+      <category term="https" scheme="https://ppxu.me/tags/https/"/>
     
-      <category term="nginx" scheme="http://ppxu.me/tags/nginx/"/>
+      <category term="nginx" scheme="https://ppxu.me/tags/nginx/"/>
     
-      <category term="ssl" scheme="http://ppxu.me/tags/ssl/"/>
+      <category term="ssl" scheme="https://ppxu.me/tags/ssl/"/>
     
-      <category term="blog" scheme="http://ppxu.me/categories/blog/"/>
+      <category term="blog" scheme="https://ppxu.me/categories/blog/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[阿里云ECS搭建hexo]]></title>
-    <link href="http://ppxu.me/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/"/>
-    <id>http://ppxu.me/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/</id>
+    <link href="https://ppxu.me/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/"/>
+    <id>https://ppxu.me/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/</id>
     <published>2015-12-19T02:31:27.000Z</published>
     <updated>2015-12-21T02:27:47.000Z</updated>
     <content type="html"><![CDATA[<p>最近刚撸了个阿里云ECS服务器来折腾，先搭个hexo博客耍耍，这里记录一下操作步骤。</p>
@@ -279,24 +280,24 @@
     
     </summary>
     
-      <category term="aliyun" scheme="http://ppxu.me/tags/aliyun/"/>
+      <category term="aliyun" scheme="https://ppxu.me/tags/aliyun/"/>
     
-      <category term="centos" scheme="http://ppxu.me/tags/centos/"/>
+      <category term="centos" scheme="https://ppxu.me/tags/centos/"/>
     
-      <category term="ecs" scheme="http://ppxu.me/tags/ecs/"/>
+      <category term="ecs" scheme="https://ppxu.me/tags/ecs/"/>
     
-      <category term="hexo" scheme="http://ppxu.me/tags/hexo/"/>
+      <category term="hexo" scheme="https://ppxu.me/tags/hexo/"/>
     
-      <category term="nodejs" scheme="http://ppxu.me/tags/nodejs/"/>
+      <category term="nodejs" scheme="https://ppxu.me/tags/nodejs/"/>
     
-      <category term="blog" scheme="http://ppxu.me/categories/blog/"/>
+      <category term="blog" scheme="https://ppxu.me/categories/blog/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[Hello World]]></title>
-    <link href="http://ppxu.me/2015/12/18/hello-world/"/>
-    <id>http://ppxu.me/2015/12/18/hello-world/</id>
+    <link href="https://ppxu.me/2015/12/18/hello-world/"/>
+    <id>https://ppxu.me/2015/12/18/hello-world/</id>
     <published>2015-12-18T14:31:17.000Z</published>
     <updated>2015-12-18T14:31:17.000Z</updated>
     <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
