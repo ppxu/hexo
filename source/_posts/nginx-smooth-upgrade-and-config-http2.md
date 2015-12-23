@@ -1,4 +1,4 @@
-title: 平滑升级nginx并配置HTTP/2
+title: 平滑升级Nginx并配置HTTP/2
 date: 2015-12-23 12:47:40
 categories: blog
 tags: [aliyun, ecs, centos, nginx, http2]

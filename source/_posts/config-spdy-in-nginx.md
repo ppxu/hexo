@@ -1,9 +1,9 @@
-title: nginx配置SPDY
+title: Nginx配置SPDY
 date: 2015-12-22 17:32:20
 categories: blog
 tags: [aliyun, ecs, centos, nginx, spdy]
 ---
-本来准备给服务器搞个HTTP/2上去，发现nginx要到1.9.5才可以支持HTTP/2协议，现在服务器上的nginx版本才1.8.0，想了想先试试SPDY吧，改天再来升级nginx和HTTP/2。
+本来准备给服务器搞个HTTP/2上去，发现Nginx要到1.9.5才可以支持HTTP/2协议，现在服务器上的Nginx版本才1.8.0，想了想先试试SPDY吧，改天再来升级Nginx和HTTP/2。
 
 <!--more-->
 

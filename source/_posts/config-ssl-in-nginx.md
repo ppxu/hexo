@@ -1,4 +1,4 @@
-title: 阿里云ECS配置nginx和ssl
+title: 阿里云ECS配置Nginx和SSL
 date: 2015-12-20 22:01:05
 categories: blog
 tags: [aliyun, ecs, centos, nginx, ssl, https]
