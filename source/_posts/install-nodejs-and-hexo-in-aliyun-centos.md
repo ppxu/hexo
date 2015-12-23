@@ -3,7 +3,7 @@ date: 2015-12-19 10:31:27
 categories: blog
 tags: [aliyun, ecs, centos, nodejs, hexo]
 ---
-最近刚撸了个阿里云ECS服务器来折腾，先搭个hexo博客耍耍，这里记录一下操作步骤。
+最近刚撸了个阿里云ECS服务器来折腾，先搭个Hexo博客耍耍，这里记录一下操作步骤。
 
 <!--more-->
 
@@ -32,7 +32,7 @@ CPU：1核
   # yum -y update
   {% endcodeblock %}
 
-  * 下载Nodejs
+  * 下载Node.js
 
   {% codeblock %}
   # cd /usr/local/src
@@ -60,7 +60,7 @@ CPU：1核
   # npm -v
   {% endcodeblock %}
 
-* 安装hexo
+* 安装Hexo
 
 {% codeblock %}
 # npm install -g hexo-cli
@@ -69,14 +69,14 @@ CPU：1核
 # npm install
 {% endcodeblock %}
 
-* 启动hexo
+* 启动Hexo
 
 {% codeblock %}
 # hexo server    //普通启动
 # hexo server &  //静默启动
 {% endcodeblock %}
 
-启动成功后就可以通过服务器的ip地址`xx.xx.xx.xx:4000`访问到页面了，然后需要把4000转到80上，通常做法是用nginx做反向代理，这里先用iptables防火墙简单做一下转发处理。
+启动成功后就可以通过服务器的ip地址`xx.xx.xx.xx:4000`访问到页面了，然后需要把4000转到80上，通常做法是用Nginx做反向代理，这里先用iptables防火墙简单做一下转发处理。
 
 * 转到80端口
 

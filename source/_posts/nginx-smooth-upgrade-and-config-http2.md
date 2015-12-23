@@ -3,10 +3,10 @@ date: 2015-12-23 12:47:40
 categories: blog
 tags: [aliyun, ecs, centos, nginx, http2]
 ---
-话说SPDY已经被HTTP/2上位了，网站继续用SPDY也不合适，今天就趁空升级了最新的nginx，并开启了HTTP/2，下面是操作过程
+话说SPDY已经被HTTP/2上位了，网站继续用SPDY也不合适，今天就趁空升级了最新的Nginx，并开启了HTTP/2，下面是操作过程
 <!--more-->
 
-1. 检查当前nginx版本和配置参数
+1. 检查当前Nginx版本和配置参数
 
   {% codeblock %}
   # nginx -V
@@ -19,7 +19,7 @@ tags: [aliyun, ecs, centos, nginx, http2]
 
   记下这里的configure arguments，后面编译的时候要用的。
 
-2. 安装PCRE，nginx的rewrite模块依赖PCRE
+2. 安装PCRE，Nginx的rewrite模块依赖PCRE
 
   {% codeblock %}
   # cd /ppxu
@@ -31,7 +31,7 @@ tags: [aliyun, ecs, centos, nginx, http2]
   # make && make install
   {% endcodeblock %}
 
-3. 下载openssl，可以从[OpenSSL](https://www.openssl.org/)或者[LibreSSL](http://www.libressl.org/)下载
+3. 下载OpenSSL，可以从[OpenSSL](https://www.openssl.org/)或者[LibreSSL](http://www.libressl.org/)下载
 
   {% codeblock %}
   # cd /ppxu
@@ -39,7 +39,7 @@ tags: [aliyun, ecs, centos, nginx, http2]
   # tar zxvf libressl-2.3.1.tar.gz
   {% endcodeblock %}
 
-4. 下载，配置并编译nginx
+4. 下载，配置并编译Nginx
 
   {% codeblock %}
   # cd /ppxu
@@ -52,7 +52,7 @@ tags: [aliyun, ecs, centos, nginx, http2]
 
   其中的`--with-http_v2_module`就是开启HTTP/2的设置。
 
-5. 替换nginx
+5. 替换Nginx
 
   {% codeblock %}
   # which nginx    //查找nginx路径
@@ -70,7 +70,7 @@ tags: [aliyun, ecs, centos, nginx, http2]
   nginx version: nginx/1.9.9
   {% endcodeblock %}
 
-7. 更新nginx配置文件
+7. 更新Nginx配置文件
 
   {% codeblock %}
   server {
@@ -81,7 +81,7 @@ tags: [aliyun, ecs, centos, nginx, http2]
       ...
   {% endcodeblock %}
 
-8. 重启nginx即可
+8. 重启Nginx即可
 
 访问网站，在响应头里可以看到`server:nginx/1.9.9`，同时，在[chrome://net-internals/#http2](chrome://net-internals/#http2)上面可以看到网站已经支持了HTTP/2
 

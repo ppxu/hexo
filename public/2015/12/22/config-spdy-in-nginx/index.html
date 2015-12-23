@@ -7,7 +7,7 @@
     </title>
     <meta name="description" content="本来准备给服务器搞个HTTP/2上去，发现nginx要到1.9.5才可以支持HTTP/2协议，现在服务器上的nginx版本才1.8.0，想了想先试试SPDY吧，改天再来升级nginx和HTTP/2。
 
-首先查看一下本地的nginx是不是已经包含了SPDY
+首先查看一下本地的Nginx是不是已经包含了SPDY
 1&lt;span class">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <link rel="short icon" href="/favicon.png">
@@ -37,12 +37,12 @@
                       </div>
                 <div class="post-content"><p>本来准备给服务器搞个HTTP/2上去，发现nginx要到1.9.5才可以支持HTTP/2协议，现在服务器上的nginx版本才1.8.0，想了想先试试SPDY吧，改天再来升级nginx和HTTP/2。</p>
 <a id="more"></a>
-<p>首先查看一下本地的nginx是不是已经包含了SPDY</p>
+<p>首先查看一下本地的Nginx是不是已经包含了SPDY</p>
 <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># nginx -V |grep spdy</span></span><br></pre></td></tr></table></figure>
-<p>如果看到有<code>–-with-http_spdy_module</code>，就说明已经支持了SPDY，如果没有的话需要重新下载和编译nginx，在编译的时候加上<code>--with-http_spdy_module</code>选项。</p>
-<p>然后修改nginx的配置文件</p>
+<p>如果看到有<code>–-with-http_spdy_module</code>，就说明已经支持了SPDY，如果没有的话需要重新下载和编译Nginx，在编译的时候加上<code>--with-http_spdy_module</code>选项。</p>
+<p>然后修改Nginx的配置文件</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">80</span>;</span><br><span class="line">    listen       <span class="number">443</span> ssl spdy;</span><br><span class="line">    server_name  ppxu.me *.ppxu.me;</span><br><span class="line"></span><br><span class="line">    add_header   Alternate-Protocol  <span class="number">443</span>:npn-spdy/<span class="number">3.1</span>;</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-<p>重启nginx，SPDY就启动成功了。</p>
+<p>重启Nginx，SPDY就启动成功了。</p>
 <p>访问网站，然后在chrome中打开<code>chrome://net-internals/#http2</code>，就可以看到站点已经支持了SPDY3.1</p>
 <p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/spdy.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/spdy.png"></p>
 <p>还可以在这个<a href="https://spdycheck.org/" target="_blank" rel="external">网站</a>检查SPDY启动情况。</p>

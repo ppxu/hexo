@@ -7,15 +7,15 @@ tags: [aliyun, ecs, centos, nginx, spdy]
 
 <!--more-->
 
-首先查看一下本地的nginx是不是已经包含了SPDY
+首先查看一下本地的Nginx是不是已经包含了SPDY
 
 {% codeblock %}
 # nginx -V |grep spdy
 {% endcodeblock %}
 
-如果看到有`–-with-http_spdy_module`，就说明已经支持了SPDY，如果没有的话需要重新下载和编译nginx，在编译的时候加上`--with-http_spdy_module`选项。
+如果看到有`–-with-http_spdy_module`，就说明已经支持了SPDY，如果没有的话需要重新下载和编译Nginx，在编译的时候加上`--with-http_spdy_module`选项。
 
-然后修改nginx的配置文件
+然后修改Nginx的配置文件
 
 {% codeblock %}
 server {
@@ -27,7 +27,7 @@ server {
     ...
 {% endcodeblock %}
 
-重启nginx，SPDY就启动成功了。
+重启Nginx，SPDY就启动成功了。
 
 访问网站，然后在chrome中打开`chrome://net-internals/#http2`，就可以看到站点已经支持了SPDY3.1
 

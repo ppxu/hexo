@@ -5,7 +5,7 @@
     <meta name="X-UA-Compatible" content="IE=edge">
     <title>阿里云ECS搭建hexo · PPxu is me
     </title>
-    <meta name="description" content="最近刚撸了个阿里云ECS服务器来折腾，先搭个hexo博客耍耍，这里记录一下操作步骤。
+    <meta name="description" content="最近刚撸了个阿里云ECS服务器来折腾，先搭个Hexo博客耍耍，这里记录一下操作步骤。
 
 撸主选的是最便宜的阿里云ECS，应付日常小撸应该足够了，具体配置如下：
 1234">
@@ -35,7 +35,7 @@
                         <div class="post-time">2015年12月19日
                         </div>
                       </div>
-                <div class="post-content"><p>最近刚撸了个阿里云ECS服务器来折腾，先搭个hexo博客耍耍，这里记录一下操作步骤。</p>
+                <div class="post-content"><p>最近刚撸了个阿里云ECS服务器来折腾，先搭个Hexo博客耍耍，这里记录一下操作步骤。</p>
 <a id="more"></a>
 <p>撸主选的是最便宜的阿里云ECS，应付日常小撸应该足够了，具体配置如下：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CPU：<span class="number">1</span>核</span><br><span class="line">内存：<span class="number">1024</span>MB</span><br><span class="line">操作系统：CentOS <span class="number">7.0</span> <span class="number">64</span>位</span><br><span class="line">带宽：<span class="number">1</span>Mbps</span><br></pre></td></tr></table></figure>
@@ -51,7 +51,7 @@
 </ul>
 <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># yum -y update</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>下载Nodejs</li>
+<li>下载Node.js</li>
 </ul>
 <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># cd /usr/local/src</span></span><br><span class="line"><span class="preprocessor"># wget http://nodejs.org/dist/node-latest.tar.gz</span></span><br></pre></td></tr></table></figure>
 <ul>
@@ -67,15 +67,15 @@
 </ul>
 <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># node -v</span></span><br><span class="line"><span class="preprocessor"># npm -v</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>安装hexo</p>
+<li><p>安装Hexo</p>
 </li>
 </ul>
 <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># npm install -g hexo-cli</span></span><br><span class="line"><span class="preprocessor"># hexo init blog</span></span><br><span class="line"><span class="preprocessor"># cd blog</span></span><br><span class="line"><span class="preprocessor"># npm install</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>启动hexo</li>
+<li>启动Hexo</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># hexo server    <span class="comment">//普通启动</span></span></span><br><span class="line"><span class="preprocessor"># hexo server &amp;  <span class="comment">//静默启动</span></span></span><br></pre></td></tr></table></figure>
-<p>启动成功后就可以通过服务器的ip地址<code>xx.xx.xx.xx:4000</code>访问到页面了，然后需要把4000转到80上，通常做法是用nginx做反向代理，这里先用iptables防火墙简单做一下转发处理。</p>
+<p>启动成功后就可以通过服务器的ip地址<code>xx.xx.xx.xx:4000</code>访问到页面了，然后需要把4000转到80上，通常做法是用Nginx做反向代理，这里先用iptables防火墙简单做一下转发处理。</p>
 <ul>
 <li>转到80端口</li>
 </ul>

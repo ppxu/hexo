@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="X-UA-Compatible" content="IE=edge">
-    <title>使用Github的Webhooks实现hexo的自动部署 · PPxu is me
+    <title>使用Github的Webhooks实现Hexo的自动部署 · PPxu is me
     </title>
-    <meta name="description" content="博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了hexo博客的自动部署，过程记录如下。
+    <meta name="description" content="博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，再pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了Hexo博客的自动部署，过程记录如下。
 
 整个过程有两个环节：
-&lt;a href=&quot;#u672C_u5730_u4EE3_u7801_u81EA_u52A8_u90E8_u7F72_u5230Github&quot; clas">
+&lt;a href=&quot;#u672C_u5730_u4EE3_u7801_u81EA_u52A8_u90E8_u7F72_u5230Github&quot; cla">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <link rel="short icon" href="/favicon.png">
     <link rel="stylesheet" href="/css/apollo.css">
@@ -29,23 +29,23 @@
     <section class="container">
             <div class="post">
               <article class="post-block">
-                <h1 class="post-title">使用Github的Webhooks实现hexo的自动部署
+                <h1 class="post-title">使用Github的Webhooks实现Hexo的自动部署
                 </h1>
                       <div class="post-meta">
                         <div class="post-time">2015年12月21日
                         </div>
                       </div>
-                <div class="post-content"><p>博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了hexo博客的自动部署，过程记录如下。</p>
+                <div class="post-content"><p>博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，再pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了Hexo博客的自动部署，过程记录如下。</p>
 <a id="more"></a>
 <p>整个过程有两个环节：</p>
-<h3 id="u672C_u5730_u4EE3_u7801_u81EA_u52A8_u90E8_u7F72_u5230Github"><a href="#u672C_u5730_u4EE3_u7801_u81EA_u52A8_u90E8_u7F72_u5230Github" class="headerlink" title="本地代码自动部署到Github"></a>本地代码自动部署到Github</h3><p>hexo本身就有deploy功能，只要在<code>_config.yml</code>里面做一下<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">配置</a>，就可以部署到Github、Heroku等平台上，如果博客是托管在Github Pages上的话使用这种方式可以很方便的实现自动部署，不过通过这种方式发送到Github上的只有<code>public</code>目录，我这里希望托管整个应用的代码，就不能使用这种方式了，反正只要可以push就行了，我们搬出shell大法好。</p>
+<h3 id="u672C_u5730_u4EE3_u7801_u81EA_u52A8_u90E8_u7F72_u5230Github"><a href="#u672C_u5730_u4EE3_u7801_u81EA_u52A8_u90E8_u7F72_u5230Github" class="headerlink" title="本地代码自动部署到Github"></a>本地代码自动部署到Github</h3><p>Hexo本身就有deploy功能，只要在<code>_config.yml</code>里面做一下<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">配置</a>，就可以部署到Github、Heroku等平台上，如果博客是托管在Github Pages上的话使用这种方式可以很方便的实现自动部署，不过通过这种方式发送到Github上的只有<code>public</code>目录，我这里希望托管整个应用的代码，就不能使用这种方式了，反正只要可以push就行了，我们搬出shell大法好。</p>
 <p>创建文件<code>deploy.sh</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] deploy hexo start \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] hexo generate...  \033[0m"</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] git commit...  \033[0m"</span></span><br><span class="line">d=`date +%x-%T`</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"auto deploy at "</span><span class="variable">$&#123;d&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] git push...  \033[0m"</span></span><br><span class="line">git push origin master</span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] deploy hexo finish \033[0m"</span></span><br></pre></td></tr></table></figure>
 <p>然后增加权限</p>
 <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># chmod +x ./deploy.sh</span></span><br></pre></td></tr></table></figure>
 <p>这样完成本地开发后，只要执行命令</p>
 <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># ./deploy.sh</span></span><br></pre></td></tr></table></figure>
-<p>就可以让hexo生成静态文件并push到Github上。</p>
+<p>就可以让Hexo生成静态文件并push到Github上。</p>
 <h3 id="Github_u81EA_u52A8_u540C_u6B65_u5230_u670D_u52A1_u5668"><a href="#Github_u81EA_u52A8_u540C_u6B65_u5230_u670D_u52A1_u5668" class="headerlink" title="Github自动同步到服务器"></a>Github自动同步到服务器</h3><p>为了让服务器可以自动同步Github上面的更新，我们需要用到Github的Webhooks。</p>
 <p>首先创建文件<code>sync.sh</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO SYNC] sync hexo start \033[0m"</span></span><br><span class="line"><span class="built_in">cd</span> /ppxu/blog</span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO SYNC] git pull...  \033[0m"</span></span><br><span class="line">git pull origin master</span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO SYNC] sync hexo finish \033[0m"</span></span><br></pre></td></tr></table></figure>
@@ -53,7 +53,7 @@
 <p>然后找到Github仓库的Settings页</p>
 <p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/hook.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/hook.png"></p>
 <p>添加一条Webhook，填写请求地址<code>http://xx.xx.xx.xx:7777/webhook</code>，这样每当Github收到push或者其他事件时就会自动向这个地址发送一条POST请求。</p>
-<p>下面在服务器上补充这个请求地址，我们用node搭一个简单的http服务，这里用到了<a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a>处理hook消息，创建文件<code>server.js</code></p>
+<p>下面在服务器上补充这个请求地址，我们用Node搭一个简单的http服务，这里用到了<a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a>处理hook消息，创建文件<code>server.js</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">var</span> exec = <span class="built_in">require</span>(<span class="string">'child_process'</span>).exec;</span><br><span class="line"><span class="keyword">var</span> createHandler = <span class="built_in">require</span>(<span class="string">'github-webhook-handler'</span>)</span><br><span class="line"><span class="keyword">var</span> handler = createHandler(&#123; path: <span class="string">'/webhook'</span>, secret: <span class="string">'********'</span> &#125;);</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  handler(req, res, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    res.statusCode = <span class="number">404</span>;</span><br><span class="line">    res.end(<span class="string">'no such location'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;).listen(<span class="number">7777</span>);</span><br><span class="line"></span><br><span class="line">handler.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">'Error:'</span>, err.message);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">handler.on(<span class="string">'push'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received a push event for %s to %s'</span>,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.ref);</span><br><span class="line">  exec(<span class="string">'/ppxu/blog/sync.sh'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, stdout, stderr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'sync server err: '</span> + stderr);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(stdout);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>这里的<code>secret</code>要和在Github上新建hook时设置的一样，请求时校验用的。</p>
 <p>然后启动服务</p>
@@ -79,7 +79,7 @@
     <footer>
             <div class="paginator"><a href="/2015/12/22/config-spdy-in-nginx/" class="prev">上一篇</a><a href="/2015/12/20/config-ssl-in-nginx/" class="next">下一篇</a>
             </div>
-      <div data-thread-key="2015/12/21/auto-deploy-hexo-with-github-webhooks/" data-title="使用Github的Webhooks实现hexo的自动部署" data-url="https://ppxu.me/2015/12/21/auto-deploy-hexo-with-github-webhooks/" data-author-key="1" class="ds-thread"></div>
+      <div data-thread-key="2015/12/21/auto-deploy-hexo-with-github-webhooks/" data-title="使用Github的Webhooks实现Hexo的自动部署" data-url="https://ppxu.me/2015/12/21/auto-deploy-hexo-with-github-webhooks/" data-author-key="1" class="ds-thread"></div>
       <script>
         var duoshuoQuery = {short_name:"ppxu"};
         (function() {
