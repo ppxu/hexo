@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="https://ppxu.me/"/>
-  <updated>2015-12-24T09:00:56.000Z</updated>
+  <updated>2015-12-24T13:56:48.000Z</updated>
   <id>https://ppxu.me/</id>
   
   <author>
@@ -15,11 +15,44 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[让Hexo支持emoji表情]]></title>
+    <link href="https://ppxu.me/2015/12/24/enable-emoji-in-hexo/"/>
+    <id>https://ppxu.me/2015/12/24/enable-emoji-in-hexo/</id>
+    <published>2015-12-24T13:23:43.000Z</published>
+    <updated>2015-12-24T13:56:48.000Z</updated>
+    <content type="html"><![CDATA[<p>Hexo的文章内容默认是不支持emoji表情的，为了让文章更生动，今天就研究了下怎么支持emoji。</p>
+<a id="more"></a>
+<p>Hexo默认的markdown编译插件是<a href="https://github.com/hexojs/hexo-renderer-marked" target="_blank" rel="external">hexo-renderer-marked</a>，看了一下相关文档，好像没办法支持emoji，还好在Hexo的<a href="https://hexo.io/plugins/" target="_blank" rel="external">plugins</a>页，我们找到了另外一个markdown插件<a href="https://github.com/celsomiranda/hexo-renderer-markdown-it" target="_blank" rel="external">hexo-renderer-markdown-it</a>，而且号称速度比默认的还要快，最主要的是，在<a href="https://github.com/markdown-it/markdown-it" target="_blank" rel="external">markdown-it</a>的文档里面，我们发现它可以通过plugins的方式支持<a href="https://github.com/markdown-it/markdown-it-emoji" target="_blank" rel="external">emoji</a>。</p>
+<p>下面我们就来替换markdown插件</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># cd /ppxu/blog/</span></span><br><span class="line"><span class="preprocessor"># cnpm un hexo-renderer-marked --save</span></span><br><span class="line"><span class="preprocessor"># cnpm i hexo-renderer-markdown-it --save</span></span><br></pre></td></tr></table></figure>
+<p>不过此时的hexo-renderer-markdown-it还是用不了emoji的，我们需要加上emoji的plugin</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># cd node_modules/hexo-renderer-markdown-it/</span></span><br><span class="line"><span class="preprocessor"># cnpm install markdown-it-emoji --save</span></span><br></pre></td></tr></table></figure>
+<p>然后编辑Hexo的配置文件<code>_config.yml</code></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">markdown</span>:</span><br><span class="line">  <span class="attribute">render</span>:</span><br><span class="line">    <span class="attribute">html</span>: true</span><br><span class="line">    <span class="attribute">xhtmlOut</span>: false</span><br><span class="line">    <span class="attribute">breaks</span>: false</span><br><span class="line">    <span class="attribute">linkify</span>: true</span><br><span class="line">    <span class="attribute">typographer</span>: true</span><br><span class="line">    <span class="attribute">quotes</span>: <span class="string">'“”‘’'</span></span><br><span class="line">  <span class="attribute">plugins</span>:</span><br><span class="line">    - markdown-it-footnote</span><br><span class="line">    - markdown-it-sup</span><br><span class="line">    - markdown-it-sub</span><br><span class="line">    - markdown-it-abbr</span><br><span class="line">    - markdown-it-emoji</span><br><span class="line">  <span class="attribute">anchors</span>:</span><br><span class="line">    <span class="attribute">level</span>: <span class="number">2</span></span><br><span class="line">    <span class="attribute">collisionSuffix</span>: <span class="string">'v'</span></span><br><span class="line">    <span class="attribute">permalink</span>: true</span><br><span class="line">    <span class="attribute">permalinkClass</span>: header-anchor</span><br><span class="line">    <span class="attribute">permalinkSymbol</span>: ¶</span><br></pre></td></tr></table></figure>
+<p>关键就是在plugins里加上<code>- markdown-it-emoji</code>，其他的配置说明可以参见<a href="https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki/Advanced-Configuration" target="_blank" rel="external">wiki</a>。</p>
+<p>重启Hexo服务，即可生效，看这里 😄 😏 😌 😝 😴</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Hexo的文章内容默认是不支持emoji表情的，为了让文章更生动，今天就研究了下怎么支持emoji。</p>]]>
+    
+    </summary>
+    
+      <category term="emoji" scheme="https://ppxu.me/tags/emoji/"/>
+    
+      <category term="hexo" scheme="https://ppxu.me/tags/hexo/"/>
+    
+      <category term="markdown" scheme="https://ppxu.me/tags/markdown/"/>
+    
+      <category term="blog" scheme="https://ppxu.me/categories/blog/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[平滑升级Nginx并配置HTTP/2]]></title>
     <link href="https://ppxu.me/2015/12/23/nginx-smooth-upgrade-and-config-http2/"/>
     <id>https://ppxu.me/2015/12/23/nginx-smooth-upgrade-and-config-http2/</id>
     <published>2015-12-23T04:47:40.000Z</published>
-    <updated>2015-12-24T09:00:56.000Z</updated>
+    <updated>2015-12-24T13:26:42.000Z</updated>
     <content type="html"><![CDATA[<p>话说SPDY已经被HTTP/2上位了，网站继续用SPDY也不合适，今天就趁空升级了最新的Nginx，并开启了HTTP/2，下面是操作过程</p>
 <a id="more"></a>
 <ol>

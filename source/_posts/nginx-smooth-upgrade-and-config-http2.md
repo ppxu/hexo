@@ -4,6 +4,7 @@ categories: blog
 tags: [aliyun, ecs, centos, nginx, http2]
 ---
 话说SPDY已经被HTTP/2上位了，网站继续用SPDY也不合适，今天就趁空升级了最新的Nginx，并开启了HTTP/2，下面是操作过程
+
 <!--more-->
 
 1. 检查当前Nginx版本和配置参数
