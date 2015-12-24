@@ -8,7 +8,8 @@
     <meta name="description" content="博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，再pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了Hexo博客的自动部署，过程记录如下。
 
 整个过程有两个环节：
-&lt;a href=&quot;#u672C_u5730_u4EE3_u7801_u81EA_u52A8_u90E8_u7F72_u5230Github&quot; cla">
+¶本地代码自动部署到Github
+Hexo本身就有deploy功能，只要在_config.yml&lt;/c">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <link rel="short icon" href="/favicon.png">
     <link rel="stylesheet" href="/css/apollo.css">
@@ -38,7 +39,8 @@
                 <div class="post-content"><p>博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，再pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了Hexo博客的自动部署，过程记录如下。</p>
 <a id="more"></a>
 <p>整个过程有两个环节：</p>
-<h3 id="u672C_u5730_u4EE3_u7801_u81EA_u52A8_u90E8_u7F72_u5230Github"><a href="#u672C_u5730_u4EE3_u7801_u81EA_u52A8_u90E8_u7F72_u5230Github" class="headerlink" title="本地代码自动部署到Github"></a>本地代码自动部署到Github</h3><p>Hexo本身就有deploy功能，只要在<code>_config.yml</code>里面做一下<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">配置</a>，就可以部署到Github、Heroku等平台上，如果博客是托管在Github Pages上的话使用这种方式可以很方便的实现自动部署，不过通过这种方式发送到Github上的只有<code>public</code>目录，我这里希望托管整个应用的代码，就不能使用这种方式了，反正只要可以push就行了，我们搬出shell大法好。</p>
+<h3 id="本地代码自动部署到github"><a class="header-anchor" href="#本地代码自动部署到github">¶</a>本地代码自动部署到Github</h3>
+<p>Hexo本身就有deploy功能，只要在<code>_config.yml</code>里面做一下<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">配置</a>，就可以部署到Github、Heroku等平台上，如果博客是托管在Github Pages上的话使用这种方式可以很方便的实现自动部署，不过通过这种方式发送到Github上的只有<code>public</code>目录，我这里希望托管整个应用的代码，就不能使用这种方式了，反正只要可以push就行了，我们搬出shell大法好。</p>
 <p>创建文件<code>deploy.sh</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] deploy hexo start \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] hexo generate...  \033[0m"</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] git commit...  \033[0m"</span></span><br><span class="line">d=`date +%x-%T`</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"auto deploy at "</span><span class="variable">$&#123;d&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] git push...  \033[0m"</span></span><br><span class="line">git push origin master</span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] deploy hexo finish \033[0m"</span></span><br></pre></td></tr></table></figure>
 <p>然后增加权限</p>
@@ -46,7 +48,8 @@
 <p>这样完成本地开发后，只要执行命令</p>
 <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># ./deploy.sh</span></span><br></pre></td></tr></table></figure>
 <p>就可以让Hexo生成静态文件并push到Github上。</p>
-<h3 id="Github_u81EA_u52A8_u540C_u6B65_u5230_u670D_u52A1_u5668"><a href="#Github_u81EA_u52A8_u540C_u6B65_u5230_u670D_u52A1_u5668" class="headerlink" title="Github自动同步到服务器"></a>Github自动同步到服务器</h3><p>为了让服务器可以自动同步Github上面的更新，我们需要用到Github的Webhooks。</p>
+<h3 id="github自动同步到服务器"><a class="header-anchor" href="#github自动同步到服务器">¶</a>Github自动同步到服务器</h3>
+<p>为了让服务器可以自动同步Github上面的更新，我们需要用到Github的Webhooks。</p>
 <p>首先创建文件<code>sync.sh</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO SYNC] sync hexo start \033[0m"</span></span><br><span class="line"><span class="built_in">cd</span> /ppxu/blog</span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO SYNC] git pull...  \033[0m"</span></span><br><span class="line">git pull origin master</span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO SYNC] sync hexo finish \033[0m"</span></span><br></pre></td></tr></table></figure>
 <p>目标是每当Github有push的时候就自动调用这个脚本。</p>
@@ -63,12 +66,16 @@
 <p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/deploy.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/deploy.png"></p>
 <p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/sync.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/sync.png"></p>
 <p>感觉生活一下子美好起来了呢：）</p>
-<h4 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h4><ul>
-<li><p><a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/deployment.html</a></p>
+<h4 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h4>
+<ul>
+<li>
+<p><a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/deployment.html</a></p>
 </li>
-<li><p><a href="https://developer.github.com/webhooks/" target="_blank" rel="external">https://developer.github.com/webhooks/</a></p>
+<li>
+<p><a href="https://developer.github.com/webhooks/" target="_blank" rel="external">https://developer.github.com/webhooks/</a></p>
 </li>
-<li><p><a href="http://www.lovelucy.info/auto-deploy-website-by-webhooks-of-github-and-gitlab.html" target="_blank" rel="external">http://www.lovelucy.info/auto-deploy-website-by-webhooks-of-github-and-gitlab.html</a></p>
+<li>
+<p><a href="http://www.lovelucy.info/auto-deploy-website-by-webhooks-of-github-and-gitlab.html" target="_blank" rel="external">http://www.lovelucy.info/auto-deploy-website-by-webhooks-of-github-and-gitlab.html</a></p>
 </li>
 </ul>
 

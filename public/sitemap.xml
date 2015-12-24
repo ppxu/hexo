@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ppxu.me/2015/12/23/nginx-smooth-upgrade-and-config-http2/</loc>
+    <lastmod>2015-12-24T09:00:56.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ppxu.me/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/</loc>
     <lastmod>2015-12-23T13:47:51.000Z</lastmod>
   </url>
@@ -9,11 +14,6 @@
   <url>
     <loc>https://ppxu.me/2015/12/20/config-ssl-in-nginx/</loc>
     <lastmod>2015-12-23T13:46:43.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ppxu.me/2015/12/23/nginx-smooth-upgrade-and-config-http2/</loc>
-    <lastmod>2015-12-23T13:46:36.000Z</lastmod>
   </url>
   
   <url>
