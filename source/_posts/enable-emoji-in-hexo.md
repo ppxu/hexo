@@ -51,4 +51,6 @@ markdown:
 
 关键就是在plugins里加上`- markdown-it-emoji`，其他的配置说明可以参见[wiki](https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki/Advanced-Configuration)。
 
-重启Hexo服务，即可生效，看这里 :smile: :smirk: :relieved: :stuck_out_tongue_closed_eyes: :sleeping:
+重启Hexo服务，即可生效，这里输入`:smile: :smirk: :relieved:`，效果 :smile: :smirk: :relieved:
+
+当然直接输入表情也是可以的 😂
