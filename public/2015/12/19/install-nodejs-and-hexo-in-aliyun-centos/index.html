@@ -43,54 +43,54 @@
 <ul>
 <li>连接服务器</li>
 </ul>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ssh root<span class="doctag">@xx</span>.xx.xx.xx</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@xx.xx.xx.xx</span><br></pre></td></tr></table></figure>
 <ul>
 <li>
 <p>安装Nodejs环境</p>
 <ul>
 <li>更新软件源</li>
 </ul>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># yum -y update</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y update</span><br></pre></td></tr></table></figure>
 <ul>
 <li>下载Node.js</li>
 </ul>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># cd /usr/local/src</span></span><br><span class="line"><span class="preprocessor"># wget http://nodejs.org/dist/node-latest.tar.gz</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src</span><br><span class="line">$ wget http://nodejs.org/dist/node-latest.tar.gz</span><br></pre></td></tr></table></figure>
 <ul>
 <li>解压</li>
 </ul>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># tar zxf node-latest.tar.gz</span></span><br><span class="line"><span class="preprocessor"># cd node-v*.*.*</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ tar zxf node-latest.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> node-v*.*.*</span><br></pre></td></tr></table></figure>
 <ul>
 <li>编译安装</li>
 </ul>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># ./configure</span></span><br><span class="line"><span class="preprocessor"># make &amp;&amp; make install</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure</span><br><span class="line">$ make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 <ul>
 <li>确认安装成功</li>
 </ul>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># node -v</span></span><br><span class="line"><span class="preprocessor"># npm -v</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">$ npm -v</span><br></pre></td></tr></table></figure>
 </li>
 <li>
 <p>安装Hexo</p>
 </li>
 </ul>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># npm install -g hexo-cli</span></span><br><span class="line"><span class="preprocessor"># hexo init blog</span></span><br><span class="line"><span class="preprocessor"># cd blog</span></span><br><span class="line"><span class="preprocessor"># npm install</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
 <ul>
 <li>启动Hexo</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># hexo server    <span class="comment">//普通启动</span></span></span><br><span class="line"><span class="preprocessor"># hexo server &amp;  <span class="comment">//静默启动</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server    //普通启动</span><br><span class="line">$ hexo server &amp;  //静默启动</span><br></pre></td></tr></table></figure>
 <p>启动成功后就可以通过服务器的ip地址<code>xx.xx.xx.xx:4000</code>访问到页面了，然后需要把4000转到80上，通常做法是用Nginx做反向代理，这里先用iptables防火墙简单做一下转发处理。</p>
 <ul>
 <li>转到80端口</li>
 </ul>
 <p>编辑iptables文件</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># vi /etc/sysconfig/iptables</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/sysconfig/iptables</span><br></pre></td></tr></table></figure>
 <p>加上下面这段</p>
 <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">80</span> -j ACCEPT</span><br><span class="line">-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">4000</span> -j ACCEPT</span><br><span class="line"></span><br><span class="line">*nat</span><br><span class="line">-A PREROUTING -p tcp --dport <span class="number">80</span> -j REDIRECT --to-ports <span class="number">4000</span></span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure>
 <p>重启iptables服务</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># service iptables restart</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service iptables restart</span><br></pre></td></tr></table></figure>
 <p>这时发现报错了</p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed <span class="built_in">to</span> restart iptables.service: Unit iptables.service failed <span class="built_in">to</span> <span class="built_in">load</span>: No such <span class="built_in">file</span> <span class="operator">or</span> <span class="built_in">directory</span>.</span><br></pre></td></tr></table></figure>
 <p>查了一下原来是CentOS 7中的防火墙改成了firewalld，所以要换回iptables。</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># systemctl stop firewalld</span></span><br><span class="line"><span class="preprocessor"># systemctl mask firewalld</span></span><br><span class="line"><span class="preprocessor"># yum install iptables-services</span></span><br><span class="line"><span class="preprocessor"># systemctl enable iptables</span></span><br><span class="line"><span class="preprocessor"># service start iptables</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl stop firewalld</span><br><span class="line">$ systemctl mask firewalld</span><br><span class="line">$ yum install iptables-services</span><br><span class="line">$ systemctl <span class="built_in">enable</span> iptables</span><br><span class="line">$ service start iptables</span><br></pre></td></tr></table></figure>
 <p>这样就可以通过ip地址<code>xx.xx.xx.xx</code>直接访问网站了。</p>
 <ul>
 <li>域名解析</li>

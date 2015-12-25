@@ -9,72 +9,72 @@ tags: [aliyun, ecs, centos, nodejs, hexo]
 
 撸主选的是最便宜的阿里云ECS，应付日常小撸应该足够了，具体配置如下：
 
-{% codeblock %}
+```
 CPU：1核
 内存：1024MB
 操作系统：CentOS 7.0 64位
 带宽：1Mbps
-{% endcodeblock %}
+```
 
 下面是具体的手法：
 
 * 连接服务器
 
-{% codeblock %}
-# ssh root@xx.xx.xx.xx
-{% endcodeblock %}
+``` bash
+$ ssh root@xx.xx.xx.xx
+```
 
 * 安装Nodejs环境
 
   * 更新软件源
 
-  {% codeblock %}
-  # yum -y update
-  {% endcodeblock %}
+  ``` bash
+  $ yum -y update
+  ```
 
   * 下载Node.js
 
-  {% codeblock %}
-  # cd /usr/local/src
-  # wget http://nodejs.org/dist/node-latest.tar.gz
-  {% endcodeblock %}
+  ``` bash
+  $ cd /usr/local/src
+  $ wget http://nodejs.org/dist/node-latest.tar.gz
+  ```
 
   * 解压
 
-  {% codeblock %}
-  # tar zxf node-latest.tar.gz
-  # cd node-v*.*.*
-  {% endcodeblock %}
+  ``` bash
+  $ tar zxf node-latest.tar.gz
+  $ cd node-v*.*.*
+  ```
 
   * 编译安装
 
-  {% codeblock %}
-  # ./configure
-  # make && make install
-  {% endcodeblock %}
+  ``` bash
+  $ ./configure
+  $ make && make install
+  ```
 
   * 确认安装成功
 
-  {% codeblock %}
-  # node -v
-  # npm -v
-  {% endcodeblock %}
+  ``` bash
+  $ node -v
+  $ npm -v
+  ```
 
 * 安装Hexo
 
-{% codeblock %}
-# npm install -g hexo-cli
-# hexo init blog
-# cd blog
-# npm install
-{% endcodeblock %}
+``` bash
+$ npm install -g hexo-cli
+$ hexo init blog
+$ cd blog
+$ npm install
+```
 
 * 启动Hexo
 
-{% codeblock %}
-# hexo server    //普通启动
-# hexo server &  //静默启动
-{% endcodeblock %}
+``` bash
+$ hexo server    //普通启动
+$ hexo server &  //静默启动
+```
 
 启动成功后就可以通过服务器的ip地址`xx.xx.xx.xx:4000`访问到页面了，然后需要把4000转到80上，通常做法是用Nginx做反向代理，这里先用iptables防火墙简单做一下转发处理。
 
@@ -82,42 +82,42 @@ CPU：1核
 
 编辑iptables文件
 
-{% codeblock %}
-# vi /etc/sysconfig/iptables
-{% endcodeblock %}
+``` bash
+$ vi /etc/sysconfig/iptables
+```
 
 加上下面这段
 
-{% codeblock %}
+```
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 4000 -j ACCEPT
 
 *nat
 -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 4000
 COMMIT
-{% endcodeblock %}
+```
 
 重启iptables服务
 
-{% codeblock %}
-# service iptables restart
-{% endcodeblock %}
+``` bash
+$ service iptables restart
+```
 
 这时发现报错了
 
-{% codeblock %}
+```
 Failed to restart iptables.service: Unit iptables.service failed to load: No such file or directory.
-{% endcodeblock %}
+```
 
 查了一下原来是CentOS 7中的防火墙改成了firewalld，所以要换回iptables。
 
-{% codeblock %}
-# systemctl stop firewalld
-# systemctl mask firewalld
-# yum install iptables-services
-# systemctl enable iptables
-# service start iptables
-{% endcodeblock %}
+``` bash
+$ systemctl stop firewalld
+$ systemctl mask firewalld
+$ yum install iptables-services
+$ systemctl enable iptables
+$ service start iptables
+```
 
 这样就可以通过ip地址`xx.xx.xx.xx`直接访问网站了。
 

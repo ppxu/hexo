@@ -15,7 +15,7 @@ Hexo本身就有deploy功能，只要在`_config.yml`里面做一下[配置](htt
 
 创建文件`deploy.sh`
 
-{% codeblock %}
+``` bash
 #!/bin/bash
 
 echo -e "\033[32m [AUTO DEPLOY] deploy hexo start \033[0m"
@@ -28,19 +28,19 @@ git commit -m "auto deploy at "${d}
 echo -e "\033[32m [AUTO DEPLOY] git push...  \033[0m"
 git push origin master
 echo -e "\033[32m [AUTO DEPLOY] deploy hexo finish \033[0m"
-{% endcodeblock %}
+```
 
 然后增加权限
 
-{% codeblock %}
-# chmod +x ./deploy.sh
-{% endcodeblock %}
+``` bash
+$ chmod +x ./deploy.sh
+```
 
 这样完成本地开发后，只要执行命令
 
-{% codeblock %}
-# ./deploy.sh
-{% endcodeblock %}
+``` bash
+$ ./deploy.sh
+```
 
 就可以让Hexo生成静态文件并push到Github上。
 
@@ -50,7 +50,7 @@ echo -e "\033[32m [AUTO DEPLOY] deploy hexo finish \033[0m"
 
 首先创建文件`sync.sh`
 
-{% codeblock %}
+``` bash
 #!/bin/bash
 
 echo -e "\033[32m [AUTO SYNC] sync hexo start \033[0m"
@@ -58,7 +58,7 @@ cd /ppxu/blog
 echo -e "\033[32m [AUTO SYNC] git pull...  \033[0m"
 git pull origin master
 echo -e "\033[32m [AUTO SYNC] sync hexo finish \033[0m"
-{% endcodeblock %}
+```
 
 目标是每当Github有push的时候就自动调用这个脚本。
 
@@ -70,7 +70,7 @@ echo -e "\033[32m [AUTO SYNC] sync hexo finish \033[0m"
 
 下面在服务器上补充这个请求地址，我们用Node搭一个简单的http服务，这里用到了[github-webhook-handler](https://github.com/rvagg/github-webhook-handler)处理hook消息，创建文件`server.js`
 
-{% codeblock %}
+``` javascript
 var http = require('http')
 var exec = require('child_process').exec;
 var createHandler = require('github-webhook-handler')
@@ -99,15 +99,15 @@ handler.on('push', function (event) {
     }
   });
 });
-{% endcodeblock %}
+```
 
 这里的`secret`要和在Github上新建hook时设置的一样，请求时校验用的。
 
 然后启动服务
 
-{% codeblock %}
-# node server.js &
-{% endcodeblock %}
+``` bash
+$ node server.js &
+```
 
 这里也可以用forever之类的工具防止进程挂掉。
 

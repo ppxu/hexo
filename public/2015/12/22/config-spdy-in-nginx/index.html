@@ -38,7 +38,7 @@
                 <div class="post-content"><p>本来准备给服务器搞个HTTP/2上去，发现Nginx要到1.9.5才可以支持HTTP/2协议，现在服务器上的Nginx版本才1.8.0，想了想先试试SPDY吧，改天再来升级Nginx和HTTP/2。</p>
 <a id="more"></a>
 <p>首先查看一下本地的Nginx是不是已经包含了SPDY</p>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># nginx -V |grep spdy</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nginx -V |grep spdy</span><br></pre></td></tr></table></figure>
 <p>如果看到有<code>–-with-http_spdy_module</code>，就说明已经支持了SPDY，如果没有的话需要重新下载和编译Nginx，在编译的时候加上<code>--with-http_spdy_module</code>选项。</p>
 <p>然后修改Nginx的配置文件</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">80</span>;</span><br><span class="line">    listen       <span class="number">443</span> ssl spdy;</span><br><span class="line">    server_name  ppxu.me *.ppxu.me;</span><br><span class="line"></span><br><span class="line">    add_header   Alternate-Protocol  <span class="number">443</span>:npn-spdy/<span class="number">3.1</span>;</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
