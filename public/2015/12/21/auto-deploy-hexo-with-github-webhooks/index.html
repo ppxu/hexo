@@ -7,9 +7,9 @@
     </title>
     <meta name="description" content="博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，再pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了Hexo博客的自动部署，过程记录如下。
 
-整个过程有两个环节：
+整个过程主要有两个环节：
 ¶本地代码自动部署到Github
-Hexo本身就有deploy功能，只要在_config.yml&lt;/c">
+Hexo本身就有deploy功能，只要在_config.yml&lt;">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <link rel="short icon" href="/favicon.png">
     <link rel="stylesheet" href="/css/apollo.css">
@@ -38,9 +38,9 @@ Hexo本身就有deploy功能，只要在_config.yml&lt;/c">
                       </div>
                 <div class="post-content"><p>博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，再pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了Hexo博客的自动部署，过程记录如下。</p>
 <a id="more"></a>
-<p>整个过程有两个环节：</p>
+<p>整个过程主要有两个环节：</p>
 <h3 id="本地代码自动部署到github"><a class="header-anchor" href="#本地代码自动部署到github">¶</a>本地代码自动部署到Github</h3>
-<p>Hexo本身就有deploy功能，只要在<code>_config.yml</code>里面做一下<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">配置</a>，就可以部署到Github、Heroku等平台上，如果博客是托管在Github Pages上的话使用这种方式可以很方便的实现自动部署，不过通过这种方式发送到Github上的只有<code>public</code>目录，我这里希望托管整个应用的代码，就不能使用这种方式了，反正只要可以push就行了，我们搬出shell大法好。</p>
+<p>Hexo本身就有deploy功能，只要在<code>_config.yml</code>里面做一下<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="external">配置</a>，就可以部署到Github、Heroku等平台上，如果博客是托管在Github Pages上的话使用这种方式可以很方便的实现自动部署，不过通过这种方式发送到Github上的只有<code>public</code>静态文件目录，我这里希望托管整个应用的代码，就不能使用这种方式了，反正只要可以push就行了，我们搬出shell大法好。</p>
 <p>创建文件<code>deploy.sh</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] deploy hexo start \033[0m"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] hexo generate...  \033[0m"</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] git commit...  \033[0m"</span></span><br><span class="line">d=`date +%x-%T`</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"auto deploy at "</span><span class="variable">$&#123;d&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] git push...  \033[0m"</span></span><br><span class="line">git push origin master</span><br><span class="line"><span class="built_in">echo</span> <span class="operator">-e</span> <span class="string">"\033[32m [AUTO DEPLOY] deploy hexo finish \033[0m"</span></span><br></pre></td></tr></table></figure>
 <p>然后增加权限</p>
@@ -101,7 +101,7 @@ Hexo本身就有deploy功能，只要在_config.yml&lt;/c">
         
       </script>
       <div class="powered">
-        <p>Powered by<span>&nbsp;<a href="http://www.aliyun.com/" target="_blank">Aliyun</a></span><span>&nbsp;&</span><span>&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a></span></p>
+        <p>Powered by<span>&nbsp;<a href="http://www.aliyun.com/" target="_blank">Aliyun</a></span><span>&nbsp;&&</span><span>&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a></span></p>
       </div>
     </footer>
     <script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src ="//hm.baidu.com/hm.js?3acd3117bffe31f23c04e3b8fec963fc";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();

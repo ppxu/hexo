@@ -7,11 +7,11 @@ tags: [github, webhooks, hexo, deploy, shell]
 
 <!--more-->
 
-整个过程有两个环节：
+整个过程主要有两个环节：
 
 ### 本地代码自动部署到Github
 
-Hexo本身就有deploy功能，只要在`_config.yml`里面做一下[配置](https://hexo.io/zh-cn/docs/deployment.html)，就可以部署到Github、Heroku等平台上，如果博客是托管在Github Pages上的话使用这种方式可以很方便的实现自动部署，不过通过这种方式发送到Github上的只有`public`目录，我这里希望托管整个应用的代码，就不能使用这种方式了，反正只要可以push就行了，我们搬出shell大法好。
+Hexo本身就有deploy功能，只要在`_config.yml`里面做一下[配置](https://hexo.io/zh-cn/docs/deployment.html)，就可以部署到Github、Heroku等平台上，如果博客是托管在Github Pages上的话使用这种方式可以很方便的实现自动部署，不过通过这种方式发送到Github上的只有`public`静态文件目录，我这里希望托管整个应用的代码，就不能使用这种方式了，反正只要可以push就行了，我们搬出shell大法好。
 
 创建文件`deploy.sh`
 

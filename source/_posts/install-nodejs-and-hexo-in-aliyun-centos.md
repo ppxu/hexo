@@ -1,22 +1,22 @@
-title: 阿里云ECS搭建Hexo
+title: 阿里云ECS搭建Hexo博客
 date: 2015-12-19 10:31:27
 categories: blog
-tags: [aliyun, ecs, centos, nodejs, hexo]
+tags: [aliyun, ecs, centos, nodejs, hexo, blog]
 ---
 最近刚撸了个阿里云ECS服务器来折腾，先搭个Hexo博客耍耍，这里记录一下操作步骤。
 
 <!--more-->
 
-撸主选的是最便宜的阿里云ECS，应付日常小撸应该足够了，具体配置如下：
+撸主选的是最便宜的阿里云ECS，应付日常小撸妥妥的，具体配置如下：
 
 ```
 CPU：1核
 内存：1024MB
-操作系统：CentOS 7.0 64位
+操作系统：CentOS 7.2 64位
 带宽：1Mbps
 ```
 
-下面是具体的手法：
+下面是具体的步骤：
 
 * 连接服务器
 
@@ -76,7 +76,7 @@ $ hexo server    //普通启动
 $ hexo server &  //静默启动
 ```
 
-启动成功后就可以通过服务器的ip地址`xx.xx.xx.xx:4000`访问到页面了，然后需要把4000转到80上，通常做法是用Nginx做反向代理，这里先用iptables防火墙简单做一下转发处理。
+启动成功后就可以通过服务器的ip地址`xx.xx.xx.xx:4000`访问到页面了，然后把4000转到80上，通常做法是用Nginx做反向代理，这里先用iptables防火墙简单做一下转发处理。
 
 * 转到80端口
 
@@ -109,7 +109,7 @@ $ service iptables restart
 Failed to restart iptables.service: Unit iptables.service failed to load: No such file or directory.
 ```
 
-查了一下原来是CentOS 7中的防火墙改成了firewalld，所以要换回iptables。
+查了一下原来是CentOS 7中的防火墙改成了firewalld，这里先换回iptables。
 
 ``` bash
 $ systemctl stop firewalld

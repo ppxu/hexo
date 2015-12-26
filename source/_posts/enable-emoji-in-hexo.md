@@ -3,7 +3,7 @@ date: 2015-12-24 21:23:43
 categories: blog
 tags: [hexo, markdown, emoji]
 ---
-Hexo的文章内容默认是不支持emoji表情的，为了让文章更生动，今天就研究了下怎么支持emoji。
+Hexo的文章内容默认是不支持emoji表情的，作为一个有逼格的码农，怎么少得了丰富的表情语言，今天就研究了下怎么支持emoji。
 
 <!--more-->
 
