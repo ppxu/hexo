@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <title>electron快速上手（译） · PPxu is me
+    </title>
+    <meta name="description" content="Electron可以让你使用纯JavaScript创建桌面应用程序，它提供了一个包含丰富的原生（操作系统）API的运行时。你可以把它看作是一个Node.js运行时的变体，只不过它是专注于桌面应用程序而不是web服务器。
+这并不是说Electron是一个操作图形用户界面（GUI）库的JavaScript工具，实际上，Electron使用网页作为它的GUI，因此你也可以把它看作是一个精简版的Chromium浏览器，通过JavaScript来控制。
+
+&lt;a class=&quot;header-anchor&quot; href=&quot;">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <link rel="short icon" href="/favicon.png">
+    <link rel="stylesheet" href="/css/apollo.css">
+  </head>
+  <body>
+    <header><a href="/" class="logo-link"><img src="/ppxu.jpg"></a>
+      <ul class="nav nav-list">
+        <li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">博客</a>
+        </li>
+        <li class="nav-list-item"><a href="http://weibo.com/ppxu" target="_blank" class="nav-list-link">微博</a>
+        </li>
+        <li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a>
+        </li>
+        <li class="nav-list-item"><a href="https://github.com/ppxu" target="_blank" class="nav-list-link">GITHUB</a>
+        </li>
+      </ul>
+    </header>
+    <section class="container">
+            <div class="post">
+              <article class="post-block">
+                <h1 class="post-title">electron快速上手（译）
+                </h1>
+                      <div class="post-meta">
+                        <div class="post-time">2016年1月31日
+                        </div>
+                      </div>
+                <div class="post-content"><p>Electron可以让你使用纯JavaScript创建桌面应用程序，它提供了一个包含丰富的原生（操作系统）API的运行时。你可以把它看作是一个Node.js运行时的变体，只不过它是专注于桌面应用程序而不是web服务器。</p>
+<p>这并不是说Electron是一个操作图形用户界面（GUI）库的JavaScript工具，实际上，Electron使用网页作为它的GUI，因此你也可以把它看作是一个精简版的Chromium浏览器，通过JavaScript来控制。</p>
+<a id="more"></a>
+<h3 id="主进程"><a class="header-anchor" href="#主进程">¶</a>主进程</h3>
+<p>在Electron中，运行<code>package.json</code>中的<code>main</code>脚本的进程叫作主进程（the main process）。主进程中运行的脚本可以通过创建网页来显示一个GUI界面。</p>
+<h3 id="渲染进程"><a class="header-anchor" href="#渲染进程">¶</a>渲染进程</h3>
+<p>由于Electron使用Chromium来显示网页，Chromium的多线程架构也用到了。Electron中的每一个网页都在一个独立的进程中运行，即渲染进程（the renderer process）。</p>
+<p>在普通的浏览器中，网页通常是在一个沙箱环境中运行，不允许访问本地资源。不过使用Electron就可以在网页中利用Node.js的API来实现一些初级的操作系统交互。</p>
+<h3 id="主进程和渲染进程的区别"><a class="header-anchor" href="#主进程和渲染进程的区别">¶</a>主进程和渲染进程的区别</h3>
+<p>主进程通过创建<code>BrowserWindow</code>实例来生成网页，每个<code>BrowserWindow</code>实例在它自己的渲染进程中运行网页。当一个<code>BrowserWindow</code>实例销毁时，对应的渲染进程也被终止。</p>
+<p>主进程管理所有的网页和它们相对应的渲染进程，每个渲染进程是独立的，只须关心在它上面运行的网页。</p>
+<p>在网页中调用原生的GUI相关API是不允许的，因为在网页中管理原生GUI资源是十分危险的，很容易泄露资源。如果你想在网页中操作GUI，该网页的渲染进程必须要和主进程通信，请求在主进程上进行这些操作。</p>
+<p>在Electron中，我们提供了<a href="http://electron.atom.io/docs/v0.36.5/api/ipc-renderer" target="_blank" rel="external">ipc</a>模块用来实现主进程和渲染进程之间的通信。另外还有一个<a href="http://electron.atom.io/docs/v0.36.5/api/remote" target="_blank" rel="external">remote</a>模块用来做RPC类型的通信。</p>
+<h2 id="编写你的第一个electron应用"><a class="header-anchor" href="#编写你的第一个electron应用">¶</a>编写你的第一个Electron应用</h2>
+<p>通常一个Electron应用的结构类似这样：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">your-app/</span><br><span class="line">├── package<span class="class">.json</span></span><br><span class="line">├── main<span class="class">.js</span></span><br><span class="line">└── index.html</span><br></pre></td></tr></table></figure>
+<p><code>package.json</code>的格式和Node模块完全一样，<code>main</code>字段指定的脚本就是你的应用的启动脚本，它会运行主进程。一个<code>package.json</code>可能类似这样：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">name</span>"    : <span class="value"><span class="string">"your-app"</span></span>,</span><br><span class="line">  "<span class="attribute">version</span>" : <span class="value"><span class="string">"0.1.0"</span></span>,</span><br><span class="line">  "<span class="attribute">main</span>"    : <span class="value"><span class="string">"main.js"</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：如果<code>package.json</code>中没有指定<code>main</code>字段，Electron会尝试加载<code>index.js</code>。</p>
+<p><code>main.js</code>需要创建窗口并且处理系统事件，一个典型的例子如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> electron = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line"><span class="keyword">const</span> app = electron.app;  <span class="comment">// Module to control application life.</span></span><br><span class="line"><span class="keyword">const</span> BrowserWindow = electron.BrowserWindow;  <span class="comment">// Module to create native browser window.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Keep a global reference of the window object, if you don't, the window will</span></span><br><span class="line"><span class="comment">// be closed automatically when the JavaScript object is garbage collected.</span></span><br><span class="line"><span class="keyword">var</span> mainWindow = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Quit when all windows are closed.</span></span><br><span class="line">app.on(<span class="string">'window-all-closed'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// On OS X it is common for applications and their menu bar</span></span><br><span class="line">  <span class="comment">// to stay active until the user quits explicitly with Cmd + Q</span></span><br><span class="line">  <span class="keyword">if</span> (process.platform != <span class="string">'darwin'</span>) &#123;</span><br><span class="line">    app.quit();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// This method will be called when Electron has finished</span></span><br><span class="line"><span class="comment">// initialization and is ready to create browser windows.</span></span><br><span class="line">app.on(<span class="string">'ready'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Create the browser window.</span></span><br><span class="line">  mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;width: <span class="number">800</span>, height: <span class="number">600</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// and load the index.html of the app.</span></span><br><span class="line">  mainWindow.loadURL(<span class="string">'file://'</span> + __dirname + <span class="string">'/index.html'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Open the DevTools.</span></span><br><span class="line">  mainWindow.webContents.openDevTools();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Emitted when the window is closed.</span></span><br><span class="line">  mainWindow.on(<span class="string">'closed'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Dereference the window object, usually you would store windows</span></span><br><span class="line">    <span class="comment">// in an array if your app supports multi windows, this is the time</span></span><br><span class="line">    <span class="comment">// when you should delete the corresponding element.</span></span><br><span class="line">    mainWindow = <span class="literal">null</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>最后这个<code>index.html</code>就是你想要展现的网页：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line">    We are using node <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.node)</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>,</span><br><span class="line">    Chrome <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.chrome)</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>,</span><br><span class="line">    and Electron <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.electron)</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>.</span><br><span class="line">  <span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="运行你的应用"><a class="header-anchor" href="#运行你的应用">¶</a>运行你的应用</h2>
+<p>当你创建完最初的<code>main.js</code>，<code>index.html</code>和<code>package.json</code>文件，你肯定迫不及待想要在本地尝试跑一下你的应用，看看它是不是像预期那样的运行。</p>
+<h3 id="electron-prebuilt"><a class="header-anchor" href="#electron-prebuilt">¶</a>electron-prebuilt</h3>
+<p>如果你通过<code>npm</code>全局安装了<code>electron-prebuilt</code>，你只需要在你的应用目录下运行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">electron .</span><br></pre></td></tr></table></figure>
+<p>如果你是局部安装的，运行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./node_modules/.bin/electron .</span><br></pre></td></tr></table></figure>
+<h3 id="手动下载的electron程序"><a class="header-anchor" href="#手动下载的electron程序">¶</a>手动下载的Electron程序</h3>
+<p>如果你是手动下载的Electron，你也可以直接运行你的应用。</p>
+<h4 id="windows"><a class="header-anchor" href="#windows">¶</a>Windows</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ .\electron\electron.exe your-app\</span><br></pre></td></tr></table></figure>
+<h4 id="linux"><a class="header-anchor" href="#linux">¶</a>Linux</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./electron/electron your-app/</span><br></pre></td></tr></table></figure>
+<h4 id="osx"><a class="header-anchor" href="#osx">¶</a>OSX</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./Electron.app/Contents/MacOS/Electron your-app/</span><br></pre></td></tr></table></figure>
+<p>这里的<code>Electron.app</code>是Electron发行包中的一部分，你可以在<a href="https://github.com/atom/electron/releases" target="_blank" rel="external">这里</a>下载。</p>
+<h3 id="发布应用"><a class="header-anchor" href="#发布应用">¶</a>发布应用</h3>
+<p>当你完成了应用的开发，你可以根据<a href="http://electron.atom.io/docs/v0.36.5/tutorial/application-distribution" target="_blank" rel="external">应用发布</a>指南来创建一个发布，并执行打包程序。</p>
+<h3 id="尝试这个例子"><a class="header-anchor" href="#尝试这个例子">¶</a>尝试这个例子</h3>
+<p>在<a href="https://github.com/atom/electron-quick-start" target="_blank" rel="external">atom/electron-quick-start</a>下载并运行这个教程的代码。</p>
+<p><strong>注意</strong>：运行代码需要系统支持<a href="https://git-scm.com/" target="_blank" rel="external">Git</a>和<a href="https://nodejs.org/en/download/" target="_blank" rel="external">Node.js</a>（含<a href="https://npmjs.org/" target="_blank" rel="external">npm</a>）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Clone the repository</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/atom/electron-quick-start</span><br><span class="line"><span class="comment"># Go into the repository</span></span><br><span class="line">$ <span class="built_in">cd</span> electron-quick-start</span><br><span class="line"><span class="comment"># Install dependencies and run the app</span></span><br><span class="line">$ npm install &amp;&amp; npm start</span><br></pre></td></tr></table></figure>
+<p><strong>原文地址</strong>：<a href="http://electron.atom.io/docs/latest/tutorial/quick-start/" target="_blank" rel="external">http://electron.atom.io/docs/latest/tutorial/quick-start/</a></p>
+
+                </div>
+              </article>
+            </div>
+    </section>
+    <footer>
+            <div class="paginator"><a class="prev"> </a><a href="/2015/12/24/enable-emoji-in-hexo/" class="next">下一篇</a>
+            </div>
+      <div data-thread-key="2016/01/31/introduce-to-electron/" data-title="electron快速上手（译）" data-url="https://ppxu.me/2016/01/31/introduce-to-electron/" data-author-key="1" class="ds-thread"></div>
+      <script>
+        var duoshuoQuery = {short_name:"ppxu"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+             || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+        
+        
+      </script>
+      <div class="powered">
+        <p>Powered by<span>&nbsp;<a href="http://www.aliyun.com/" target="_blank">Aliyun</a></span><span>&nbsp;&&</span><span>&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a></span></p>
+      </div>
+    </footer>
+    <script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src ="//hm.baidu.com/hm.js?3acd3117bffe31f23c04e3b8fec963fc";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();
+    </script>
+  </body>
+</html>
