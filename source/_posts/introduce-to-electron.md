@@ -1,4 +1,4 @@
-title: electron快速上手（译）
+title: Electron快速上手（译）
 date: 2016-01-31 21:20:40
 categories: nodejs
 tags: [electron, atom, nodejs, chromium, app]
@@ -58,39 +58,34 @@ __注意__：如果`package.json`中没有指定`main`字段，Electron会尝试
 'use strict';
 
 const electron = require('electron');
-const app = electron.app;  // Module to control application life.
-const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
+const app = electron.app;  // 控制应用生命周期的模块.
+const BrowserWindow = electron.BrowserWindow;  // 创建原生浏览器窗口的模块.
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
+// 保存窗口对象的一个全局引用，如果你不这么做，当JavaScript对象被垃圾回收后窗口会自动关闭
 var mainWindow = null;
 
-// Quit when all windows are closed.
+// 当所有窗口关闭后退出应用
 app.on('window-all-closed', function() {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
+  // 在OSX通常会让应用和它的菜单栏保持激活直到用户使用Cmd+Q强制退出
   if (process.platform != 'darwin') {
     app.quit();
   }
 });
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
+// 这个方法会在Electron完成初始化并准备好创建浏览器窗口时调用
 app.on('ready', function() {
-  // Create the browser window.
+  // 创建浏览器窗口
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
-  // and load the index.html of the app.
+  // 加载应用的index.html
   mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-  // Open the DevTools.
+  // 打开开发者工具（chromium的控制台）
   mainWindow.webContents.openDevTools();
 
-  // Emitted when the window is closed.
+  // 当窗口关闭时触发
   mainWindow.on('closed', function() {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
+    // 取消对窗口对象的引用，通常如果你的应用支持多窗口，你会将窗口存在一个数组里，这时候你应当删除对应的元素
     mainWindow = null;
   });
 });
