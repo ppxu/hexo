@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="https://ppxu.me/"/>
-  <updated>2016-02-01T15:18:54.000Z</updated>
+  <updated>2016-03-29T13:40:47.000Z</updated>
   <id>https://ppxu.me/</id>
   
   <author>
@@ -13,6 +13,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[在阿里云服务器上安装ShadowSocks服务]]></title>
+    <link href="https://ppxu.me/2016/03/29/install-shadowsocks-service/"/>
+    <id>https://ppxu.me/2016/03/29/install-shadowsocks-service/</id>
+    <published>2016-03-29T06:55:04.000Z</published>
+    <updated>2016-03-29T13:40:47.000Z</updated>
+    <content type="html"><![CDATA[<p>记录一下如何在服务器上安装科学上网工具ShadowSocks，因为没有国外的主机，只好拿阿里云试试手。</p>
+<a id="more"></a>
+<h3 id="安装shadowsocks"><a class="header-anchor" href="#安装shadowsocks">¶</a>安装shadowsocks</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ yum install epel-release</span><br><span class="line">$ yum update</span><br><span class="line">$ yum install python-setuptools</span><br><span class="line">$ easy_install pip</span><br><span class="line">$ pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<h3 id="配置shadowsocks"><a class="header-anchor" href="#配置shadowsocks">¶</a>配置shadowsocks</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/shadowsocks.json</span><br></pre></td></tr></table></figure>
+<p>输入以下内容</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">server</span>": <span class="value"><span class="string">"0.0.0.0"</span></span>,</span><br><span class="line">  "<span class="attribute">server_port</span>": <span class="value">端口号</span>,</span><br><span class="line">  "<span class="attribute">local_address</span>": <span class="value"><span class="string">"127.0.0.1"</span></span>,</span><br><span class="line">  "<span class="attribute">local_port</span>": <span class="value"><span class="number">1080</span></span>,</span><br><span class="line">  "<span class="attribute">password</span>":<span class="value"><span class="string">" 你的密码"</span></span>,</span><br><span class="line">  "<span class="attribute">timeout</span>": <span class="value"><span class="number">500</span></span>,</span><br><span class="line">  "<span class="attribute">method</span>":<span class="value"><span class="string">" aes-256-cfb"</span></span>,</span><br><span class="line">  "<span class="attribute">fast_open</span>": <span class="value"><span class="literal">true</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="启动服务"><a class="header-anchor" href="#启动服务">¶</a>启动服务</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum install python-setuptools supervisor</span><br><span class="line">$ easy_install pip</span><br><span class="line">$ pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<p>加入自动启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+<p>在最后输入</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[program:shadowsocks]</span></span><br><span class="line"><span class="setting">command=<span class="value">ssserver -c /etc/shadowsocks.json</span></span></span><br><span class="line"><span class="setting">autostart=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">autorestart=<span class="value"><span class="keyword">true</span></span></span></span><br><span class="line"><span class="setting">user=<span class="value">root</span></span></span><br></pre></td></tr></table></figure>
+<p>刷新</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chkconfig --add supervisord</span><br><span class="line">$ sudo chkconfig supervisord on</span><br><span class="line">$ service supervisord start</span><br><span class="line">$ supervisorctl reload</span><br></pre></td></tr></table></figure>
+<p>最后，重启一下服务器即可，更多的优化手段可以参考下面链接。</p>
+<h4 id="参考"><a class="header-anchor" href="#参考">¶</a>参考</h4>
+<ul>
+<li><a href="http://www.linexy.net/archives/digitalocean-build-shadowsocks-services-and-optimization-program/" target="_blank" rel="external">http://www.linexy.net/archives/digitalocean-build-shadowsocks-services-and-optimization-program/</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>记录一下如何在服务器上安装科学上网工具ShadowSocks，因为没有国外的主机，只好拿阿里云试试手。</p>]]>
+    
+    </summary>
+    
+      <category term="aliyun" scheme="https://ppxu.me/tags/aliyun/"/>
+    
+      <category term="centos" scheme="https://ppxu.me/tags/centos/"/>
+    
+      <category term="ecs" scheme="https://ppxu.me/tags/ecs/"/>
+    
+      <category term="shadowsocks" scheme="https://ppxu.me/tags/shadowsocks/"/>
+    
+      <category term="blog" scheme="https://ppxu.me/categories/blog/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Electron快速上手（译）]]></title>

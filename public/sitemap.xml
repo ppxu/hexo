@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ppxu.me/2016/03/29/install-shadowsocks-service/</loc>
+    <lastmod>2016-03-29T13:40:47.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ppxu.me/2016/01/31/introduce-to-electron/</loc>
     <lastmod>2016-02-01T15:18:54.000Z</lastmod>
   </url>
