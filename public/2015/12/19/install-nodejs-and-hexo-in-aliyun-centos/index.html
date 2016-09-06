@@ -1,96 +1,62 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="X-UA-Compatible" content="IE=edge">
-    <title>阿里云ECS搭建Hexo博客 · PPxu is me
-    </title>
-    <meta name="description" content="最近刚撸了个阿里云ECS服务器来折腾，先搭个Hexo博客耍耍，这里记录一下操作步骤。
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title>阿里云ECS搭建Hexo博客 · PPxu is me</title><meta name="description" content="最近刚撸了个阿里云ECS服务器来折腾，先搭个Hexo博客耍耍，这里记录一下操作步骤。
 
 撸主选的是最便宜的阿里云ECS，应付日常小撸妥妥的，具体配置如下：
-1234&lt;/">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-    <link rel="short icon" href="/favicon.png">
-    <link rel="stylesheet" href="/css/apollo.css">
-  </head>
-  <body>
-    <header><a href="/" class="logo-link"><img src="/ppxu.jpg"></a>
-      <ul class="nav nav-list">
-        <li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">博客</a>
-        </li>
-        <li class="nav-list-item"><a href="http://weibo.com/ppxu" target="_blank" class="nav-list-link">微博</a>
-        </li>
-        <li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a>
-        </li>
-        <li class="nav-list-item"><a href="https://github.com/ppxu" target="_blank" class="nav-list-link">GITHUB</a>
-        </li>
-      </ul>
-    </header>
-    <section class="container">
-            <div class="post">
-              <article class="post-block">
-                <h1 class="post-title">阿里云ECS搭建Hexo博客
-                </h1>
-                      <div class="post-meta">
-                        <div class="post-time">2015年12月19日
-                        </div>
-                      </div>
-                <div class="post-content"><p>最近刚撸了个阿里云ECS服务器来折腾，先搭个Hexo博客耍耍，这里记录一下操作步骤。</p>
+1234&lt;td class=&quot;code"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"></head><body><header><a href="/" class="logo-link"><img src="/ppxu.jpg"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">博客</a></li><li class="nav-list-item"><a href="http://weibo.com/ppxu" target="_blank" class="nav-list-link">微博</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li><li class="nav-list-item"><a href="https://github.com/ppxu" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">阿里云ECS搭建Hexo博客</h1><div class="post-meta"><div class="post-time">2015年12月19日</div></div><div class="post-content"><p>最近刚撸了个阿里云ECS服务器来折腾，先搭个Hexo博客耍耍，这里记录一下操作步骤。</p>
 <a id="more"></a>
 <p>撸主选的是最便宜的阿里云ECS，应付日常小撸妥妥的，具体配置如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CPU：<span class="number">1</span>核</span><br><span class="line">内存：<span class="number">1024</span>MB</span><br><span class="line">操作系统：CentOS <span class="number">7.2</span> <span class="number">64</span>位</span><br><span class="line">带宽：<span class="number">1</span>Mbps</span><br></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CPU：<span class="number">1</span>核</div><div class="line">内存：<span class="number">1024</span>MB</div><div class="line">操作系统：CentOS <span class="number">7.2</span> <span class="number">64</span>位</div><div class="line">带宽：<span class="number">1</span>Mbps</div></pre></td></tr></table></figure>
 <p>下面是具体的步骤：</p>
 <ul>
 <li>连接服务器</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@xx.xx.xx.xx</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh root@xx.xx.xx.xx</div></pre></td></tr></table></figure>
 <ul>
 <li>
 <p>安装Nodejs环境</p>
 <ul>
 <li>更新软件源</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y update</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum -y update</div></pre></td></tr></table></figure>
 <ul>
 <li>下载Node.js</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src</span><br><span class="line">$ wget http://nodejs.org/dist/node-latest.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src</div><div class="line">$ wget http://nodejs.org/dist/node-latest.tar.gz</div></pre></td></tr></table></figure>
 <ul>
 <li>解压</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ tar zxf node-latest.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> node-v*.*.*</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ tar zxf node-latest.tar.gz</div><div class="line">$ <span class="built_in">cd</span> node-v*.*.*</div></pre></td></tr></table></figure>
 <ul>
 <li>编译安装</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure</span><br><span class="line">$ make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ./configure</div><div class="line">$ make &amp;&amp; make install</div></pre></td></tr></table></figure>
 <ul>
 <li>确认安装成功</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">$ npm -v</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ node -v</div><div class="line">$ npm -v</div></pre></td></tr></table></figure>
 </li>
 <li>
 <p>安装Hexo</p>
 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo-cli</div><div class="line">$ hexo init blog</div><div class="line">$ <span class="built_in">cd</span> blog</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
 <ul>
 <li>启动Hexo</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server    //普通启动</span><br><span class="line">$ hexo server &amp;  //静默启动</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo server    //普通启动</div><div class="line">$ hexo server &amp;  //静默启动</div></pre></td></tr></table></figure>
 <p>启动成功后就可以通过服务器的ip地址<code>xx.xx.xx.xx:4000</code>访问到页面了，然后把4000转到80上，通常做法是用Nginx做反向代理，这里先用iptables防火墙简单做一下转发处理。</p>
 <ul>
 <li>转到80端口</li>
 </ul>
 <p>编辑iptables文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/sysconfig/iptables</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vi /etc/sysconfig/iptables</div></pre></td></tr></table></figure>
 <p>加上下面这段</p>
-<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">80</span> -j ACCEPT</span><br><span class="line">-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">4000</span> -j ACCEPT</span><br><span class="line"></span><br><span class="line">*nat</span><br><span class="line">-A PREROUTING -p tcp --dport <span class="number">80</span> -j REDIRECT --to-ports <span class="number">4000</span></span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">80</span> -j ACCEPT</div><div class="line">-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">4000</span> -j ACCEPT</div><div class="line"></div><div class="line">*nat</div><div class="line">-A PREROUTING -p tcp --dport <span class="number">80</span> -j REDIRECT --to-ports <span class="number">4000</span></div><div class="line">COMMIT</div></pre></td></tr></table></figure>
 <p>重启iptables服务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service iptables restart</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ service iptables restart</div></pre></td></tr></table></figure>
 <p>这时发现报错了</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed <span class="built_in">to</span> restart iptables.service: Unit iptables.service failed <span class="built_in">to</span> <span class="built_in">load</span>: No such <span class="built_in">file</span> <span class="operator">or</span> <span class="built_in">directory</span>.</span><br></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Failed <span class="built_in">to</span> restart iptables.service: Unit iptables.service failed <span class="built_in">to</span> <span class="built_in">load</span>: No such <span class="built_in">file</span> <span class="keyword">or</span> <span class="built_in">directory</span>.</div></pre></td></tr></table></figure>
 <p>查了一下原来是CentOS 7中的防火墙改成了firewalld，这里先换回iptables。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl stop firewalld</span><br><span class="line">$ systemctl mask firewalld</span><br><span class="line">$ yum install iptables-services</span><br><span class="line">$ systemctl <span class="built_in">enable</span> iptables</span><br><span class="line">$ service start iptables</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ systemctl stop firewalld</div><div class="line">$ systemctl mask firewalld</div><div class="line">$ yum install iptables-services</div><div class="line">$ systemctl <span class="built_in">enable</span> iptables</div><div class="line">$ service start iptables</div></pre></td></tr></table></figure>
 <p>这样就可以通过ip地址<code>xx.xx.xx.xx</code>直接访问网站了。</p>
 <ul>
 <li>域名解析</li>
@@ -111,33 +77,14 @@
 <li><a href="http://codybonney.com/redirect-port-80-to-another-port-using-iptables-on-centos/" target="_blank" rel="external">http://codybonney.com/redirect-port-80-to-another-port-using-iptables-on-centos/</a></li>
 <li><a href="http://www.vkilo.com/rhel-7-iptables-service.html" target="_blank" rel="external">http://www.vkilo.com/rhel-7-iptables-service.html</a></li>
 </ul>
+</div></article></div></section><footer><div class="paginator"><a href="/2015/12/20/config-ssl-in-nginx/" class="prev">上一篇</a><a href="/2015/12/18/hello-world/" class="next">下一篇</a></div><div data-thread-key="2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/" data-title="阿里云ECS搭建Hexo博客" data-url="https://ppxu.me/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"ppxu"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
 
-                </div>
-              </article>
-            </div>
-    </section>
-    <footer>
-            <div class="paginator"><a href="/2015/12/20/config-ssl-in-nginx/" class="prev">上一篇</a><a href="/2015/12/18/hello-world/" class="next">下一篇</a>
-            </div>
-      <div data-thread-key="2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/" data-title="阿里云ECS搭建Hexo博客" data-url="https://ppxu.me/2015/12/19/install-nodejs-and-hexo-in-aliyun-centos/" data-author-key="1" class="ds-thread"></div>
-      <script>
-        var duoshuoQuery = {short_name:"ppxu"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] 
-             || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-        
-        
-      </script>
-      <div class="powered">
-        <p>Powered by<span>&nbsp;<a href="http://www.aliyun.com/" target="_blank">Aliyun</a></span><span>&nbsp;&&</span><span>&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a></span></p>
-      </div>
-    </footer>
-    <script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src ="//hm.baidu.com/hm.js?3acd3117bffe31f23c04e3b8fec963fc";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();
-    </script>
-  </body>
-</html>
+</script><div class="powered"><p>Powered by<span>&nbsp;<a href="http://www.aliyun.com/" target="_blank">Aliyun</a></span><span>&nbsp;&&</span><span>&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a></span></p></div></footer><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src ="//hm.baidu.com/hm.js?3acd3117bffe31f23c04e3b8fec963fc";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script></body></html>

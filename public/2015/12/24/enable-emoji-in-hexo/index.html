@@ -1,78 +1,25 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="X-UA-Compatible" content="IE=edge">
-    <title>让Hexo支持emoji表情 · PPxu is me
-    </title>
-    <meta name="description" content="Hexo的文章内容默认是不支持emoji表情的，作为一个有逼格的码农，怎么少得了丰富的表情语言，今天就研究了下怎么支持emoji。
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title>让Hexo支持emoji表情 · PPxu is me</title><meta name="description" content="Hexo的文章内容默认是不支持emoji表情的，作为一个有逼格的码农，怎么少得了丰富的表情语言，今天就研究了下怎么支持emoji。
 
-Hexo默认的markdown编译插件是hexo-renderer-marked，看了一下相关文档，好像没办法支持emoji，还好在Hexo的&lt;a href=&quot;https://hexo.io/plugins/&quot; target=&quot;">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-    <link rel="short icon" href="/favicon.png">
-    <link rel="stylesheet" href="/css/apollo.css">
-  </head>
-  <body>
-    <header><a href="/" class="logo-link"><img src="/ppxu.jpg"></a>
-      <ul class="nav nav-list">
-        <li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">博客</a>
-        </li>
-        <li class="nav-list-item"><a href="http://weibo.com/ppxu" target="_blank" class="nav-list-link">微博</a>
-        </li>
-        <li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a>
-        </li>
-        <li class="nav-list-item"><a href="https://github.com/ppxu" target="_blank" class="nav-list-link">GITHUB</a>
-        </li>
-      </ul>
-    </header>
-    <section class="container">
-            <div class="post">
-              <article class="post-block">
-                <h1 class="post-title">让Hexo支持emoji表情
-                </h1>
-                      <div class="post-meta">
-                        <div class="post-time">2015年12月24日
-                        </div>
-                      </div>
-                <div class="post-content"><p>Hexo的文章内容默认是不支持emoji表情的，作为一个有逼格的码农，怎么少得了丰富的表情语言，今天就研究了下怎么支持emoji。</p>
+Hexo默认的markdown编译插件是hexo-renderer-marked，看了一下相关文档，好像没办法支持emoji，还好在Hexo的&lt;a href=&quot;https://hexo.io/plugins/&quot; target=&quot;"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"></head><body><header><a href="/" class="logo-link"><img src="/ppxu.jpg"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">博客</a></li><li class="nav-list-item"><a href="http://weibo.com/ppxu" target="_blank" class="nav-list-link">微博</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li><li class="nav-list-item"><a href="https://github.com/ppxu" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">让Hexo支持emoji表情</h1><div class="post-meta"><div class="post-time">2015年12月24日</div></div><div class="post-content"><p>Hexo的文章内容默认是不支持emoji表情的，作为一个有逼格的码农，怎么少得了丰富的表情语言，今天就研究了下怎么支持emoji。</p>
 <a id="more"></a>
 <p>Hexo默认的markdown编译插件是<a href="https://github.com/hexojs/hexo-renderer-marked" target="_blank" rel="external">hexo-renderer-marked</a>，看了一下相关文档，好像没办法支持emoji，还好在Hexo的<a href="https://hexo.io/plugins/" target="_blank" rel="external">plugins</a>页，我们找到了另外一个markdown插件<a href="https://github.com/celsomiranda/hexo-renderer-markdown-it" target="_blank" rel="external">hexo-renderer-markdown-it</a>，而且号称速度比默认的还要快，最主要的是，在<a href="https://github.com/markdown-it/markdown-it" target="_blank" rel="external">markdown-it</a>的文档里面，我们发现它可以通过plugins的方式支持<a href="https://github.com/markdown-it/markdown-it-emoji" target="_blank" rel="external">emoji</a>。</p>
 <p>下面我们就来替换markdown插件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /ppxu/blog/</span><br><span class="line">$ npm un hexo-renderer-marked --save</span><br><span class="line">$ npm i hexo-renderer-markdown-it --save</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> /ppxu/blog/</div><div class="line">$ npm un hexo-renderer-marked --save</div><div class="line">$ npm i hexo-renderer-markdown-it --save</div></pre></td></tr></table></figure>
 <p>不过此时的hexo-renderer-markdown-it还是用不了emoji的，我们需要加上emoji的plugin</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> node_modules/hexo-renderer-markdown-it/</span><br><span class="line">$ npm install markdown-it-emoji --save</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> node_modules/hexo-renderer-markdown-it/</div><div class="line">$ npm install markdown-it-emoji --save</div></pre></td></tr></table></figure>
 <p>然后编辑Hexo的配置文件<code>_config.yml</code></p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">markdown</span>:</span><br><span class="line">  <span class="attribute">render</span>:</span><br><span class="line">    <span class="attribute">html</span>: true</span><br><span class="line">    <span class="attribute">xhtmlOut</span>: false</span><br><span class="line">    <span class="attribute">breaks</span>: false</span><br><span class="line">    <span class="attribute">linkify</span>: true</span><br><span class="line">    <span class="attribute">typographer</span>: true</span><br><span class="line">    <span class="attribute">quotes</span>: <span class="string">'“”‘’'</span></span><br><span class="line">  <span class="attribute">plugins</span>:</span><br><span class="line">    - markdown-it-footnote</span><br><span class="line">    - markdown-it-sup</span><br><span class="line">    - markdown-it-sub</span><br><span class="line">    - markdown-it-abbr</span><br><span class="line">    - markdown-it-emoji</span><br><span class="line">  <span class="attribute">anchors</span>:</span><br><span class="line">    <span class="attribute">level</span>: <span class="number">2</span></span><br><span class="line">    <span class="attribute">collisionSuffix</span>: <span class="string">'v'</span></span><br><span class="line">    <span class="attribute">permalink</span>: true</span><br><span class="line">    <span class="attribute">permalinkClass</span>: header-anchor</span><br><span class="line">    <span class="attribute">permalinkSymbol</span>: ¶</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="attr">markdown:</span></div><div class="line"><span class="attr">  render:</span></div><div class="line"><span class="attr">    html:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    xhtmlOut:</span> <span class="literal">false</span></div><div class="line"><span class="attr">    breaks:</span> <span class="literal">false</span></div><div class="line"><span class="attr">    linkify:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    typographer:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    quotes:</span> <span class="string">'“”‘’'</span></div><div class="line"><span class="attr">  plugins:</span></div><div class="line"><span class="bullet">    -</span> markdown-it-footnote</div><div class="line"><span class="bullet">    -</span> markdown-it-sup</div><div class="line"><span class="bullet">    -</span> markdown-it-sub</div><div class="line"><span class="bullet">    -</span> markdown-it-abbr</div><div class="line"><span class="bullet">    -</span> markdown-it-emoji</div><div class="line"><span class="attr">  anchors:</span></div><div class="line"><span class="attr">    level:</span> <span class="number">2</span></div><div class="line"><span class="attr">    collisionSuffix:</span> <span class="string">'v'</span></div><div class="line"><span class="attr">    permalink:</span> <span class="literal">true</span></div><div class="line"><span class="attr">    permalinkClass:</span> header-anchor</div><div class="line"><span class="attr">    permalinkSymbol:</span> ¶</div></pre></td></tr></table></figure>
 <p>关键就是在plugins里加上<code>- markdown-it-emoji</code>，其他的配置说明可以参见<a href="https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki/Advanced-Configuration" target="_blank" rel="external">wiki</a>。</p>
 <p>重启Hexo服务，即可生效，这里输入<code>:smile: :smirk: :relieved:</code>，效果 😄 😏 😌</p>
 <p>当然直接输入表情也是可以的 😂</p>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/01/31/introduce-to-electron/" class="prev">上一篇</a><a href="/2015/12/23/nginx-smooth-upgrade-and-config-http2/" class="next">下一篇</a></div><div data-thread-key="2015/12/24/enable-emoji-in-hexo/" data-title="让Hexo支持emoji表情" data-url="https://ppxu.me/2015/12/24/enable-emoji-in-hexo/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"ppxu"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
 
-                </div>
-              </article>
-            </div>
-    </section>
-    <footer>
-            <div class="paginator"><a href="/2016/01/31/introduce-to-electron/" class="prev">上一篇</a><a href="/2015/12/23/nginx-smooth-upgrade-and-config-http2/" class="next">下一篇</a>
-            </div>
-      <div data-thread-key="2015/12/24/enable-emoji-in-hexo/" data-title="让Hexo支持emoji表情" data-url="https://ppxu.me/2015/12/24/enable-emoji-in-hexo/" data-author-key="1" class="ds-thread"></div>
-      <script>
-        var duoshuoQuery = {short_name:"ppxu"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0] 
-             || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-        
-        
-      </script>
-      <div class="powered">
-        <p>Powered by<span>&nbsp;<a href="http://www.aliyun.com/" target="_blank">Aliyun</a></span><span>&nbsp;&&</span><span>&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a></span></p>
-      </div>
-    </footer>
-    <script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src ="//hm.baidu.com/hm.js?3acd3117bffe31f23c04e3b8fec963fc";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();
-    </script>
-  </body>
-</html>
+</script><div class="powered"><p>Powered by<span>&nbsp;<a href="http://www.aliyun.com/" target="_blank">Aliyun</a></span><span>&nbsp;&&</span><span>&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a></span></p></div></footer><script>var _hmt = _hmt || [];(function() {var hm = document.createElement("script");hm.src ="//hm.baidu.com/hm.js?3acd3117bffe31f23c04e3b8fec963fc";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})();</script></body></html>
