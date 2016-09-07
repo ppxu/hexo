@@ -1,9 +1,9 @@
-title: 在Mac使用Docker配置nginx和node.js
+title: 在Mac上使用Docker配置nginx和node.js
 date: 2016-09-06 19:52:07
 categories: blog
 tags: [mac, docker, centos, nginx, nodejs]
 ---
-简单记录一下如何在 Mac 上使用 Docker，并配置 nginx 和 node.js 的操作步骤。
+简单记录一下如何在 Mac 上使用 Docker，并配置 nginx 和 node.js 开发环境的操作步骤。
 
 <!--more-->
 
@@ -125,6 +125,8 @@ node.js 安装好后写一个简单的 server.js
   // 上传镜像
   $ docker push ppxu/cnn:v1
 ```
+
+然后就可以在 [Docker Hub](https://hub.docker.com/) 上看到刚才上传的镜像了，其他人就可以直接使用这个镜像了。
 
 #### 参考资料
 
