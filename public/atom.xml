@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ppxu.me/"/>
-  <updated>2016-09-06T13:08:16.000Z</updated>
+  <updated>2016-09-07T07:37:21.000Z</updated>
   <id>https://ppxu.me/</id>
   
   <author>
@@ -16,13 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>在Mac使用Docker配置nginx和node.js</title>
+    <title>在Mac上使用Docker配置nginx和node.js</title>
     <link href="https://ppxu.me/2016/09/06/setup-nginx-nodejs-with-docker-in-mac/"/>
     <id>https://ppxu.me/2016/09/06/setup-nginx-nodejs-with-docker-in-mac/</id>
     <published>2016-09-06T11:52:07.000Z</published>
-    <updated>2016-09-06T13:08:16.000Z</updated>
+    <updated>2016-09-07T07:37:21.000Z</updated>
     
-    <content type="html"><![CDATA[<p>简单记录一下如何在 Mac 上使用 Docker，并配置 nginx 和 node.js 的操作步骤。</p>
+    <content type="html"><![CDATA[<p>简单记录一下如何在 Mac 上使用 Docker，并配置 nginx 和 node.js 开发环境的操作步骤。</p>
 <a id="more"></a>
 <p>Mac 上推荐使用官方的安装包来安装 <a href="https://www.docker.com/" target="_blank" rel="external">Docker</a>，这是 <a href="https://download.docker.com/mac/stable/Docker.dmg" target="_blank" rel="external">下载地址</a>，安装好后运行软件，在菜单栏上就可以看到一只萌萌的鲸鱼了。</p>
 <p>我的目标是基于一个 Linux 镜像，安装 nginx 和 node.js，运行一个简单的 node.js 服务器。</p>
@@ -45,6 +45,7 @@
 <p>在这个容器中可以看到刚刚安装的 nginx 和 node.js 都正常运行。</p>
 <p>最后我们可以把这个镜像上传到 Docker Hub 中，首先 <a href="https://hub.docker.com/" target="_blank" rel="external">注册帐号</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 用刚注册的帐号登录</div><div class="line">$ docker login</div><div class="line"></div><div class="line">// 上传镜像</div><div class="line">$ docker push ppxu/cnn:v1</div></pre></td></tr></table></figure>
+<p>然后就可以在 <a href="https://hub.docker.com/" target="_blank" rel="external">Docker Hub</a> 上看到刚才上传的镜像了，其他人就可以直接使用这个镜像了。</p>
 <h4 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h4>
 <ul>
 <li><a href="https://docs.docker.com/engine/getstarted/" target="_blank" rel="external">https://docs.docker.com/engine/getstarted/</a></li>
@@ -54,7 +55,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;简单记录一下如何在 Mac 上使用 Docker，并配置 nginx 和 node.js 的操作步骤。&lt;/p&gt;
+      &lt;p&gt;简单记录一下如何在 Mac 上使用 Docker，并配置 nginx 和 node.js 开发环境的操作步骤。&lt;/p&gt;
     
     </summary>
     
