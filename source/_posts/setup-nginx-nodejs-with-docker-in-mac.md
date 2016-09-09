@@ -26,13 +26,15 @@ Mac 上推荐使用官方的安装包来安装 [Docker](https://www.docker.com/)
 然后命令行就会切换到容器系统的命令行中，下面就是安装 nginx 和 node.js 了。
 
 ``` bash
-  // 更新包
-  $ yum -y update
+  # 不更新了，更新会增加几百M镜像体积
+  # // 更新包
+  # $ yum -y update
 
   // 安装 nginx
+  $ yum -y install wget
   $ wget http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
   $ rpm -ivh nginx-release-centos-7-0.el7.ngx.noarch.rpm
-  $ yum install nginx
+  $ yum -y install nginx
 
   // 修改一下 nginx 配置，转发 node.js 端口
   $ vi /etc/nginx/conf.d/default.conf
@@ -44,10 +46,10 @@ Mac 上推荐使用官方的安装包来安装 [Docker](https://www.docker.com/)
     server_name  localhost;
 
     location / {
-      proxy_pass          http://127.0.0.1:3000/;
-      proxy_redirect      off;
-      proxy_set_header    X-Real-IP       $remote_addr;
-      proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_pass        http://127.0.0.1:3000/;
+      proxy_redirect    off;
+      proxy_set_header  X-Real-IP        $remote_addr;
+      proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
     }
 
     ...
@@ -62,7 +64,7 @@ Mac 上推荐使用官方的安装包来安装 [Docker](https://www.docker.com/)
 
 ``` bash
   // 安装依赖
-  $ yum -y install wget gcc make gcc-c++ openssl-devel
+  $ yum -y install gcc-c++
 
   // 下载最新 node.js
   $ wget https://nodejs.org/dist/v6.5.0/node-v6.5.0.tar.gz
@@ -77,13 +79,13 @@ Mac 上推荐使用官方的安装包来安装 [Docker](https://www.docker.com/)
 node.js 安装好后写一个简单的 server.js
 
 ```
-  var http = require('http');
+  const http = require('http')
 
-  var server = http.createServer(function (req, res) {
-    res.end('Hello Docker!');
-  });
+  const server = http.createServer((req, res) => {
+    res.end('Hello Docker!')
+  })
 
-  server.listen(3000);
+  server.listen(3000)
 ```
 
 ``` bash
@@ -104,7 +106,7 @@ node.js 安装好后写一个简单的 server.js
   // 查看容器信息
   $ docker ps -a
 
-  // 将容器转化成镜像
+  // 将容器转化成镜像，ppxu 是 Docker Hub 上的用户名，cnn 是镜像名，v1 是一个 tag
   $ docker commit -m 'add nginx & node to centos' -a 'ppxu' web ppxu/cnn:v1
 
   // 查看所有的镜像
