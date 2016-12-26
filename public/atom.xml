@@ -66,11 +66,11 @@
     
       <category term="nginx" scheme="https://ppxu.me/tags/nginx/"/>
     
+      <category term="nodejs" scheme="https://ppxu.me/tags/nodejs/"/>
+    
       <category term="mac" scheme="https://ppxu.me/tags/mac/"/>
     
       <category term="docker" scheme="https://ppxu.me/tags/docker/"/>
-    
-      <category term="nodejs" scheme="https://ppxu.me/tags/nodejs/"/>
     
   </entry>
   
@@ -615,13 +615,13 @@
       <category term="blog" scheme="https://ppxu.me/categories/blog/"/>
     
     
-      <category term="hexo" scheme="https://ppxu.me/tags/hexo/"/>
-    
       <category term="aliyun" scheme="https://ppxu.me/tags/aliyun/"/>
     
       <category term="ecs" scheme="https://ppxu.me/tags/ecs/"/>
     
       <category term="centos" scheme="https://ppxu.me/tags/centos/"/>
+    
+      <category term="hexo" scheme="https://ppxu.me/tags/hexo/"/>
     
       <category term="nodejs" scheme="https://ppxu.me/tags/nodejs/"/>
     
