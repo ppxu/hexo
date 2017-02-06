@@ -1,6 +1,6 @@
 'use strict';
 
-const version = 'v20170201';
+const version = 'v20170202';
 const __DEVELOPMENT__ = false;
 const __DEBUG__ = false;
 const offlineResources = [
@@ -10,13 +10,10 @@ const offlineResources = [
 ];
 
 const ignoreFetch = [
-  /https?:\/\/cdn.bootcss.com\//,
-  /https?:\/\/static.duoshuo.com\//,
-  /https?:\/\/www.google-analytics.com\//,
-  /https?:\/\/dn-lbstatics.qbox.me\//,
-  /https?:\/\/ajax.cloudflare.com\//,
-  /https?:\/\/hm.baidu.com\//,
-  /https?:\/\/img.okay.do\//
+  /duoshuo.com/,
+  /hm.baidu.com/,
+  /img.okay.do/,
+  /clouddn.com/
 ];
 
 // ////////
