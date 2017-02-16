@@ -10,10 +10,12 @@ const offlineResources = [
 ];
 
 const ignoreFetch = [
+  /chrome-extension/,
   /duoshuo.com/,
   /hm.baidu.com/,
   /img.okay.do/,
-  /clouddn.com/
+  /clouddn.com/,
+  /cdncache.org/
 ];
 
 // ////////
