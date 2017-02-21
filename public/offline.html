@@ -7,13 +7,13 @@
   <title>PPxu is me</title>
   <meta name="description" content="A Blog Powered By Aliyun And Hexo">
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-  <link rel="short icon" href="/favicon.png">
+  <link rel="short icon" href="/img/favicon.png">
   <link rel="stylesheet" href="/css/apollo.css">
 </head>
 
 <body>
   <header>
-    <a href="/" class="logo-link"><img src="/ppxu.jpg"></a>
+    <a href="/" class="logo-link"><img src="/img/ppxu.jpg"></a>
     <ul class="nav nav-list">
       <li class="nav-list-item"><a href="/" target="_self" class="nav-list-link active">博客</a></li>
       <li class="nav-list-item"><a href="http://weibo.com/ppxu" target="_blank" class="nav-list-link">微博</a></li>
@@ -22,7 +22,7 @@
     </ul>
   </header>
   <section class="container">
-    <p>You are offline now!</p>
+    <h1>You Are Offline Now!</h1>
   </section>
   <footer>
     <div class="paginator">
@@ -45,6 +45,9 @@
   <script src="/js/snow.js"></script>
   <script>
   var snow = new Snow();
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+  }
   </script>
 </body>
 
