@@ -4,8 +4,8 @@ menu:
     rss: /atom.xml
     github: https://github.com/ppxu
 
-favicon: /favicon.png
-logo: /ppxu.jpg
+favicon: /img/favicon.png
+logo: /img/ppxu.jpg
 
 # comment
 # e.g disqus: seansun

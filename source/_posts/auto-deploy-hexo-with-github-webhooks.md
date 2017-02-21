@@ -64,7 +64,7 @@ echo -e "\033[32m [AUTO SYNC] sync hexo finish \033[0m"
 
 然后找到Github仓库的Settings页
 
-![http://7xpbfd.com1.z0.glb.clouddn.com/hook.png](http://7xpbfd.com1.z0.glb.clouddn.com/hook.png)
+![/img/hook.png](/img/hook.png)
 
 添加一条Webhook，填写请求地址`http://xx.xx.xx.xx:7777/webhook`，这样每当Github收到push或者其他事件时就会自动向这个地址发送一条POST请求。
 
@@ -113,9 +113,9 @@ $ node server.js &
 
 这样一套自动部署系统就建立好了，在本机和服务器的实际效果如下：
 
-![http://7xpbfd.com1.z0.glb.clouddn.com/deploy.png](http://7xpbfd.com1.z0.glb.clouddn.com/deploy.png)
+![/img/deploy.png](/img/deploy.png)
 
-![http://7xpbfd.com1.z0.glb.clouddn.com/sync.png](http://7xpbfd.com1.z0.glb.clouddn.com/sync.png)
+![/img/sync.png](/img/sync.png)
 
 感觉生活一下子美好起来了呢：）
 

@@ -86,7 +86,7 @@ tags: [aliyun, ecs, centos, nginx, http2]
 
 访问网站，在响应头里可以看到`server:nginx/1.9.9`，同时，在[chrome://net-internals/#http2](chrome://net-internals/#http2)上面可以看到网站已经支持了HTTP/2
 
-![http://7xpbfd.com1.z0.glb.clouddn.com/http2.png](http://7xpbfd.com1.z0.glb.clouddn.com/http2.png)
+![/img/http2.png](/img/http2.png)
 
 #### 参考资料
 

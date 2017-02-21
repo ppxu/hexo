@@ -95,7 +95,7 @@ node.js 安装好后写一个简单的 server.js
 
 这样子整个流程就跑通了，在浏览器里面访问 `http://localhost:8888`，就可以看到
 
-![http://7xpbfd.com1.z0.glb.clouddn.com/docker.png](http://7xpbfd.com1.z0.glb.clouddn.com/docker.png)
+![/img/docker.png](/img/docker.png)
 
 接下来我们还可以把这个修改过的容器保存下来
 

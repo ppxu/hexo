@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ppxu.me/"/>
-  <updated>2016-09-09T02:55:20.000Z</updated>
+  <updated>2017-02-21T07:10:04.000Z</updated>
   <id>https://ppxu.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://ppxu.me/2016/09/06/setup-nginx-nodejs-with-docker-in-mac/"/>
     <id>https://ppxu.me/2016/09/06/setup-nginx-nodejs-with-docker-in-mac/</id>
     <published>2016-09-06T11:52:07.000Z</published>
-    <updated>2016-09-09T02:55:20.000Z</updated>
+    <updated>2017-02-21T07:10:04.000Z</updated>
     
     <content type="html"><![CDATA[<p>简单记录一下如何在 Mac 上使用 Docker，并配置 nginx 和 node.js 开发环境的操作步骤。</p>
 <a id="more"></a>
@@ -39,7 +39,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</div><div class="line"></div><div class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</div><div class="line">  res.end(<span class="string">'Hello Docker!'</span>)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">server.listen(<span class="number">3000</span>)</div></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 启动 server</div><div class="line">$ node server.js</div></pre></td></tr></table></figure>
 <p>这样子整个流程就跑通了，在浏览器里面访问 <code>http://localhost:8888</code>，就可以看到</p>
-<p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/docker.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/docker.png"></p>
+<p><img src="/img/docker.png" alt="/img/docker.png"></p>
 <p>接下来我们还可以把这个修改过的容器保存下来</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 退出容器系统</div><div class="line">$ <span class="built_in">exit</span></div><div class="line"></div><div class="line">// 查看容器信息</div><div class="line">$ docker ps <span class="_">-a</span></div><div class="line"></div><div class="line">// 将容器转化成镜像，ppxu 是 Docker Hub 上的用户名，cnn 是镜像名，v1 是一个 tag</div><div class="line">$ docker commit -m <span class="string">'add nginx &amp; node to centos'</span> <span class="_">-a</span> <span class="string">'ppxu'</span> web ppxu/cnn:v1</div><div class="line"></div><div class="line">// 查看所有的镜像</div><div class="line">$ docker images</div><div class="line"></div><div class="line">// 运行刚刚保存的镜像</div><div class="line">$ docker run -it -p 8888:80 ppxu/cnn:v1</div></pre></td></tr></table></figure>
 <p>在这个容器中可以看到刚刚安装的 nginx 和 node.js 都正常运行。</p>
@@ -243,7 +243,7 @@
     <link href="https://ppxu.me/2015/12/23/nginx-smooth-upgrade-and-config-http2/"/>
     <id>https://ppxu.me/2015/12/23/nginx-smooth-upgrade-and-config-http2/</id>
     <published>2015-12-23T04:47:40.000Z</published>
-    <updated>2015-12-26T14:05:44.000Z</updated>
+    <updated>2017-02-21T07:09:56.000Z</updated>
     
     <content type="html"><![CDATA[<p>之前说到SPDY已经被HTTP/2上位了，继续用SPDY也不合适，今天就趁空升级了最新的Nginx，并开启了HTTP/2，操作过程如下</p>
 <a id="more"></a>
@@ -281,7 +281,7 @@
 <li>重启Nginx即可</li>
 </ol>
 <p>访问网站，在响应头里可以看到<code>server:nginx/1.9.9</code>，同时，在<a href="chrome://net-internals/#http2" target="_blank" rel="external">chrome://net-internals/#http2</a>上面可以看到网站已经支持了HTTP/2</p>
-<p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/http2.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/http2.png"></p>
+<p><img src="/img/http2.png" alt="/img/http2.png"></p>
 <h4 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h4>
 <ul>
 <li><a href="http://www.linuxde.net/2011/08/554.html" target="_blank" rel="external">http://www.linuxde.net/2011/08/554.html</a></li>
@@ -319,7 +319,7 @@
     <link href="https://ppxu.me/2015/12/22/config-spdy-in-nginx/"/>
     <id>https://ppxu.me/2015/12/22/config-spdy-in-nginx/</id>
     <published>2015-12-22T09:32:20.000Z</published>
-    <updated>2015-12-26T14:03:43.000Z</updated>
+    <updated>2017-02-21T07:09:01.000Z</updated>
     
     <content type="html"><![CDATA[<p>本来准备给服务器搞个HTTP/2上去，发现Nginx要到1.9.5才可以支持HTTP/2协议，现在服务器上的Nginx版本才1.8.0，想了想先试试SPDY吧，改天再来升级Nginx和HTTP/2。</p>
 <a id="more"></a>
@@ -330,7 +330,7 @@
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen       <span class="number">80</span>;</div><div class="line">    listen       <span class="number">443</span> ssl spdy;</div><div class="line">    server_name  ppxu.me *.ppxu.me;</div><div class="line"></div><div class="line">    add_header   Alternate-Protocol  <span class="number">443</span><span class="symbol">:npn-spdy/</span><span class="number">3.1</span>;</div><div class="line">    ...</div></pre></td></tr></table></figure>
 <p>重启Nginx，SPDY就配置完成了。</p>
 <p>访问一下网站，然后在chrome中打开<code>chrome://net-internals/#http2</code>，就可以看到站点已经支持了SPDY3.1</p>
-<p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/spdy.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/spdy.png"></p>
+<p><img src="/img/spdy.png" alt="/img/spdy.png"></p>
 <p>还可以在这个<a href="https://spdycheck.org/" target="_blank" rel="external">网站</a>检查SPDY情况。</p>
 <p>不过毕竟SPDY协议已经废弃了，还是赶紧搞上HTTP/2才是正事。</p>
 <h4 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h4>
@@ -382,7 +382,7 @@
     <link href="https://ppxu.me/2015/12/21/auto-deploy-hexo-with-github-webhooks/"/>
     <id>https://ppxu.me/2015/12/21/auto-deploy-hexo-with-github-webhooks/</id>
     <published>2015-12-21T09:29:24.000Z</published>
-    <updated>2015-12-26T14:01:33.000Z</updated>
+    <updated>2017-02-21T07:08:43.000Z</updated>
     
     <content type="html"><![CDATA[<p>博客之前的更新方式是先在本地写好文章，push到Github，然后ssh连到服务器上，再pull下来，如果每次都要这样操作一遍实在麻烦，今天就试着用Github的Webhooks功能实现了Hexo博客的自动部署，过程记录如下。</p>
 <a id="more"></a>
@@ -402,7 +402,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="_">-e</span> <span class="string">"\033[32m [AUTO SYNC] sync hexo start \033[0m"</span></div><div class="line"><span class="built_in">cd</span> /ppxu/blog</div><div class="line"><span class="built_in">echo</span> <span class="_">-e</span> <span class="string">"\033[32m [AUTO SYNC] git pull...  \033[0m"</span></div><div class="line">git pull origin master</div><div class="line"><span class="built_in">echo</span> <span class="_">-e</span> <span class="string">"\033[32m [AUTO SYNC] sync hexo finish \033[0m"</span></div></pre></td></tr></table></figure>
 <p>目标是每当Github有push的时候就自动调用这个脚本。</p>
 <p>然后找到Github仓库的Settings页</p>
-<p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/hook.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/hook.png"></p>
+<p><img src="/img/hook.png" alt="/img/hook.png"></p>
 <p>添加一条Webhook，填写请求地址<code>http://xx.xx.xx.xx:7777/webhook</code>，这样每当Github收到push或者其他事件时就会自动向这个地址发送一条POST请求。</p>
 <p>下面在服务器上补充这个请求地址，我们用Node搭一个简单的http服务，这里用到了<a href="https://github.com/rvagg/github-webhook-handler" target="_blank" rel="external">github-webhook-handler</a>处理hook消息，创建文件<code>server.js</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</div><div class="line"><span class="keyword">var</span> exec = <span class="built_in">require</span>(<span class="string">'child_process'</span>).exec;</div><div class="line"><span class="keyword">var</span> createHandler = <span class="built_in">require</span>(<span class="string">'github-webhook-handler'</span>)</div><div class="line"><span class="keyword">var</span> handler = createHandler(&#123; <span class="attr">path</span>: <span class="string">'/webhook'</span>, <span class="attr">secret</span>: <span class="string">'********'</span> &#125;);</div><div class="line"></div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</div><div class="line">  handler(req, res, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">    res.statusCode = <span class="number">404</span>;</div><div class="line">    res.end(<span class="string">'no such location'</span>);</div><div class="line">  &#125;);</div><div class="line">&#125;).listen(<span class="number">7777</span>);</div><div class="line"></div><div class="line">handler.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.error(<span class="string">'Error:'</span>, err.message);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">handler.on(<span class="string">'push'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'Received a push event for %s to %s'</span>,</div><div class="line">    event.payload.repository.name,</div><div class="line">    event.payload.ref);</div><div class="line">  exec(<span class="string">'/ppxu/blog/sync.sh'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, stdout, stderr</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(err) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'sync server err: '</span> + stderr);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(stdout);</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -411,8 +411,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ node server.js &amp;</div></pre></td></tr></table></figure>
 <p>这里也可以用forever之类的工具防止进程挂掉。</p>
 <p>这样一套自动部署系统就建立好了，在本机和服务器的实际效果如下：</p>
-<p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/deploy.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/deploy.png"></p>
-<p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/sync.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/sync.png"></p>
+<p><img src="/img/deploy.png" alt="/img/deploy.png"></p>
+<p><img src="/img/sync.png" alt="/img/sync.png"></p>
 <p>感觉生活一下子美好起来了呢：）</p>
 <h4 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h4>
 <ul>
@@ -454,7 +454,7 @@
     <link href="https://ppxu.me/2015/12/20/config-ssl-in-nginx/"/>
     <id>https://ppxu.me/2015/12/20/config-ssl-in-nginx/</id>
     <published>2015-12-20T14:01:05.000Z</published>
-    <updated>2015-12-26T13:58:37.000Z</updated>
+    <updated>2017-02-21T07:09:23.000Z</updated>
     
     <content type="html"><![CDATA[<p>今天给服务器安装了Nginx，并配置了SSL，网址左边终于有了萌萌哒的小绿锁，这里还是做一下记录。</p>
 <a id="more"></a>
@@ -477,7 +477,7 @@
 <p>这样只要是支持HSTS的浏览器，就可以自动完成http到https的替换，而且是直接在浏览器本地完成的，对于不支持的浏览器，只能在服务器做重定向了，继续在Nginx配置中添加一条规则</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">error_page</span> <span class="number">497</span>  https://<span class="variable">$host</span><span class="variable">$uri</span>;</div></pre></td></tr></table></figure>
 <p>这样我们的网站就已经完全支持了HTTPS访问，可以在这个网站<a href="https://www.ssllabs.com/ssltest/analyze.html" target="_blank" rel="external">https://www.ssllabs.com/ssltest/analyze.html</a>对网页进行安全评测，如果评分不够高的话可以再看看如何<a href="http://www.oschina.net/translate/strong_ssl_security_on_nginx" target="_blank" rel="external">加强nginx的SSL安全</a>。</p>
-<p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/ssl.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/ssl.png"></p>
+<p><img src="/img/ssl.png" alt="/img/ssl.png"></p>
 <h4 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h4>
 <ul>
 <li><a href="http://codybonney.com/installing-nginx-on-centos-6-4/" target="_blank" rel="external">http://codybonney.com/installing-nginx-on-centos-6-4/</a></li>

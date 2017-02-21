@@ -31,7 +31,7 @@ server {
 
 访问一下网站，然后在chrome中打开`chrome://net-internals/#http2`，就可以看到站点已经支持了SPDY3.1
 
-![http://7xpbfd.com1.z0.glb.clouddn.com/spdy.png](http://7xpbfd.com1.z0.glb.clouddn.com/spdy.png)
+![/img/spdy.png](/img/spdy.png)
 
 还可以在这个[网站](https://spdycheck.org/)检查SPDY情况。
 

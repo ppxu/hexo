@@ -3,7 +3,7 @@
 
 检查当前Nginx版本和配置参数
 
-  1234&lt;d"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"></head><body><header><a href="/" class="logo-link"><img src="/ppxu.jpg"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">博客</a></li><li class="nav-list-item"><a href="http://weibo.com/ppxu" target="_blank" class="nav-list-link">微博</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li><li class="nav-list-item"><a href="https://github.com/ppxu" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">平滑升级Nginx并配置HTTP/2</h1><div class="post-meta"><div class="post-time">2015年12月23日</div></div><div class="post-content"><p>之前说到SPDY已经被HTTP/2上位了，继续用SPDY也不合适，今天就趁空升级了最新的Nginx，并开启了HTTP/2，操作过程如下</p>
+  1234&lt;d"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><link rel="short icon" href="/img/favicon.png"><link rel="stylesheet" href="/css/apollo.css"></head><body><header><a href="/" class="logo-link"><img src="/img/ppxu.jpg"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">博客</a></li><li class="nav-list-item"><a href="http://weibo.com/ppxu" target="_blank" class="nav-list-link">微博</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li><li class="nav-list-item"><a href="https://github.com/ppxu" target="_blank" class="nav-list-link">GITHUB</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">平滑升级Nginx并配置HTTP/2</h1><div class="post-meta"><div class="post-time">2015年12月23日</div></div><div class="post-content"><p>之前说到SPDY已经被HTTP/2上位了，继续用SPDY也不合适，今天就趁空升级了最新的Nginx，并开启了HTTP/2，操作过程如下</p>
 <a id="more"></a>
 <ol>
 <li>检查当前Nginx版本和配置参数</li>
@@ -39,7 +39,7 @@
 <li>重启Nginx即可</li>
 </ol>
 <p>访问网站，在响应头里可以看到<code>server:nginx/1.9.9</code>，同时，在<a href="chrome://net-internals/#http2" target="_blank" rel="external">chrome://net-internals/#http2</a>上面可以看到网站已经支持了HTTP/2</p>
-<p><img src="http://7xpbfd.com1.z0.glb.clouddn.com/http2.png" alt="http://7xpbfd.com1.z0.glb.clouddn.com/http2.png"></p>
+<p><img src="/img/http2.png" alt="/img/http2.png"></p>
 <h4 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h4>
 <ul>
 <li><a href="http://www.linuxde.net/2011/08/554.html" target="_blank" rel="external">http://www.linuxde.net/2011/08/554.html</a></li>
