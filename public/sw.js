@@ -1,6 +1,4 @@
-'use strict';
-
-const version = 'v20170216';
+const version = 'v20170223';
 const __DEVELOPMENT__ = false;
 const __DEBUG__ = false;
 const offlineResources = [
@@ -18,9 +16,6 @@ const ignoreFetch = [
   /cdncache.org/
 ];
 
-// ////////
-// Install
-// ////////
 function onInstall (event) {
   log('install event in progress.');
 
@@ -38,9 +33,6 @@ function updateStaticCache () {
     });
 }
 
-// //////
-// Fetch
-// //////
 function onFetch (event) {
   const request = event.request;
 
@@ -62,7 +54,6 @@ function networkedOrCached (request) {
     .catch(() => { return cachedOrOffline(request); });
 }
 
-// Stash response in cache as side-effect of network request
 function networkedAndCache (request) {
   return fetch(request)
     .then((response) => {
@@ -115,9 +106,6 @@ function offlineResponse (request) {
   }
 }
 
-// /////////
-// Activate
-// /////////
 function onActivate (event) {
   log('activate event in progress.');
   event.waitUntil(removeOldCache());
@@ -127,13 +115,13 @@ function removeOldCache () {
   return caches
     .keys()
     .then((keys) => {
-      return Promise.all( // We return a promise that settles when all outdated caches are deleted.
+      return Promise.all(
         keys
          .filter((key) => {
-           return !key.startsWith(version); // Filter by keys that don't start with the latest version prefix.
+           return !key.startsWith(version);
          })
          .map((key) => {
-           return caches.delete(key); // Return a promise that's fulfilled when each outdated cache is deleted.
+           return caches.delete(key);
          })
       );
     })
